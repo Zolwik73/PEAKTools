@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units Count="5">
+      <Unit0>
+        <Filename Value="RunExample.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="25" Y="4"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="PCANBasic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="TraceFiles.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="446"/>
+        <CursorPos X="29" Y="461"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\TraceFiles\RunExample.lpr"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="54" Y="15"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="09_TraceFiles.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="114"/>
+        <CursorPos Y="146"/>
+        <UsageCount Value="20"/>
+      </Unit4>
+    </Units>
+    <JumpHistory Count="16" HistoryIndex="15">
+      <Position1>
+        <Filename Value="RunExample.lpr"/>
+        <Caret Line="5" Column="6"/>
+      </Position1>
+      <Position2>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="372" Column="58" TopLine="350"/>
+      </Position2>
+      <Position3>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="157" Column="32" TopLine="139"/>
+      </Position3>
+      <Position4>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="247" Column="80" TopLine="232"/>
+      </Position4>
+      <Position5>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="252" Column="57" TopLine="237"/>
+      </Position5>
+      <Position6>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="263" Column="62" TopLine="248"/>
+      </Position6>
+      <Position7>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="265" Column="32" TopLine="250"/>
+      </Position7>
+      <Position8>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="278" Column="63" TopLine="263"/>
+      </Position8>
+      <Position9>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="280" Column="31" TopLine="265"/>
+      </Position9>
+      <Position10>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="283" Column="65" TopLine="268"/>
+      </Position10>
+      <Position11>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="285" Column="33" TopLine="271"/>
+      </Position11>
+      <Position12>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="309" Column="67" TopLine="294"/>
+      </Position12>
+      <Position13>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="311" Column="35" TopLine="296"/>
+      </Position13>
+      <Position14>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="330" Column="63" TopLine="315"/>
+      </Position14>
+      <Position15>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="332" Column="32" TopLine="317"/>
+      </Position15>
+      <Position16>
+        <Filename Value="TraceFiles.pas"/>
+        <Caret Line="418" Column="29" TopLine="404"/>
+      </Position16>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="09_TraceFiles.pas"/>
+        <Line Value="146"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units Count="4">
+      <Unit0>
+        <Filename Value="RunExample.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <CursorPos X="45" Y="11"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="ManualRead.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="435"/>
+        <CursorPos X="61" Y="449"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="PCANBasic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\04_ManualWrite\RunExample.lpr"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+    </Units>
+    <JumpHistory Count="21" HistoryIndex="20">
+      <Position1>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="445" TopLine="2"/>
+      </Position1>
+      <Position2>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="135" Column="70" TopLine="124"/>
+      </Position2>
+      <Position3>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="188" Column="66" TopLine="175"/>
+      </Position3>
+      <Position4>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="195" Column="57" TopLine="181"/>
+      </Position4>
+      <Position5>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="209" Column="32" TopLine="194"/>
+      </Position5>
+      <Position6>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="229" Column="32" TopLine="214"/>
+      </Position6>
+      <Position7>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="317" Column="76" TopLine="304"/>
+      </Position7>
+      <Position8>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="361" Column="29" TopLine="346"/>
+      </Position8>
+      <Position9>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="373" Column="43" TopLine="358"/>
+      </Position9>
+      <Position10>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="371" Column="52" TopLine="358"/>
+      </Position10>
+      <Position11>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="375" Column="53" TopLine="360"/>
+      </Position11>
+      <Position12>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="379" Column="50" TopLine="364"/>
+      </Position12>
+      <Position13>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="384" Column="93" TopLine="369"/>
+      </Position13>
+      <Position14>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="388" Column="49" TopLine="373"/>
+      </Position14>
+      <Position15>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="391" Column="96" TopLine="376"/>
+      </Position15>
+      <Position16>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="393" Column="53" TopLine="378"/>
+      </Position16>
+      <Position17>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="391" Column="96" TopLine="378"/>
+      </Position17>
+      <Position18>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="393" Column="97" TopLine="378"/>
+      </Position18>
+      <Position19>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="395" Column="97" TopLine="380"/>
+      </Position19>
+      <Position20>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="407" Column="48" TopLine="392"/>
+      </Position20>
+      <Position21>
+        <Filename Value="ManualRead.pas"/>
+        <Caret Line="450" Column="48" TopLine="435"/>
+      </Position21>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
