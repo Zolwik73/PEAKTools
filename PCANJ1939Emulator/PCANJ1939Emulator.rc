@@ -1,0 +1,248 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Polski (Polska) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_PLK)
+LANGUAGE LANG_POLISH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_J1939_EMULATOR DIALOGEX 0, 0, 635, 370
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOPMOST
+CAPTION "PCAN J1939 Emulator"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Apply",IDC_APPLY,10,6,46,15
+    PUSHBUTTON      "Default",IDC_DEFAULT,62,6,46,15
+    CONTROL         "Auto wave",IDC_AUTO_WAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,117,8,69,13
+    LTEXT           "",IDC_STATUS,197,9,206,12
+    CONTROL         "Always on top",IDC_TOPMOST,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,531,8,86,12
+    GROUPBOX        "Engine / Vehicle",-1,7,26,200,124
+    LTEXT           "FMS SA hex",-1,16,41,63,10
+    EDITTEXT        IDC_SA,79,39,40,12,ES_AUTOHSCROLL
+    LTEXT           "RPM",-1,16,56,63,10
+    EDITTEXT        IDC_RPM,79,54,40,12,ES_AUTOHSCROLL
+    LTEXT           "Torque %",-1,16,71,63,10
+    EDITTEXT        IDC_TORQUE,79,69,40,12,ES_AUTOHSCROLL
+    LTEXT           "Load %",-1,16,86,63,10
+    EDITTEXT        IDC_LOAD,79,84,40,12,ES_AUTOHSCROLL
+    LTEXT           "Accelerator %",-1,16,101,63,10
+    EDITTEXT        IDC_ACCEL,79,99,40,12,ES_AUTOHSCROLL
+    LTEXT           "Speed km/h",-1,16,116,63,10
+    EDITTEXT        IDC_SPEED,79,114,40,12,ES_AUTOHSCROLL
+    LTEXT           "Tacho km/h",-1,16,131,63,10
+    EDITTEXT        IDC_TACHO_SPEED,79,129,40,12,ES_AUTOHSCROLL
+    CONTROL         "Engine running",IDC_ENGINE_RUNNING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,126,39,74,12
+    CONTROL         "Vehicle motion",IDC_MOTION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,126,54,74,12
+    CONTROL         "Overspeed",IDC_OVERSPEED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,126,69,74,12
+    CONTROL         "Cruise",IDC_CRUISE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,126,84,74,12
+    GROUPBOX        "Switches / Doors",-1,214,26,194,100
+    CONTROL         "Brake",IDC_BRAKE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,224,41,57,12
+    CONTROL         "Clutch",IDC_CLUTCH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,224,56,57,12
+    CONTROL         "Parking brake",IDC_PARKING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,224,71,74,12
+    CONTROL         "PTO",IDC_PTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,224,86,57,12
+    CONTROL         "Driver 1 card",IDC_DRIVER1_CARD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,311,41,80,12
+    CONTROL         "Driver 2 card",IDC_DRIVER2_CARD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,311,56,80,12
+    CONTROL         "Front door",IDC_FRONT_DOOR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,311,71,80,12
+    CONTROL         "Middle door",IDC_MIDDLE_DOOR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,311,86,80,12
+    CONTROL         "Rear door",IDC_REAR_DOOR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,311,101,80,12
+    GROUPBOX        "Fuel / Counters",-1,7,155,200,139
+    LTEXT           "Fuel used L",-1,16,170,74,10
+    EDITTEXT        IDC_FUEL_USED,90,168,46,12,ES_AUTOHSCROLL
+    LTEXT           "Fuel rate L/h",-1,16,185,74,10
+    EDITTEXT        IDC_FUEL_RATE,90,183,46,12,ES_AUTOHSCROLL
+    LTEXT           "Fuel economy",-1,16,200,74,10
+    EDITTEXT        IDC_FUEL_ECONOMY,90,198,46,12,ES_AUTOHSCROLL
+    LTEXT           "Fuel level %",-1,16,215,74,10
+    EDITTEXT        IDC_FUEL_LEVEL,90,213,46,12,ES_AUTOHSCROLL
+    LTEXT           "DEF level %",-1,16,230,74,10
+    EDITTEXT        IDC_DEF_LEVEL,90,228,46,12,ES_AUTOHSCROLL
+    LTEXT           "Engine hours",-1,16,245,74,10
+    EDITTEXT        IDC_ENGINE_HOURS,90,243,46,12,ES_AUTOHSCROLL
+    LTEXT           "Distance km",-1,16,260,74,10
+    EDITTEXT        IDC_DISTANCE,90,258,46,12,ES_AUTOHSCROLL
+    LTEXT           "Service km",-1,16,275,74,10
+    EDITTEXT        IDC_SERVICE_DISTANCE,90,273,46,12,ES_AUTOHSCROLL
+    GROUPBOX        "Environment / Vehicle Data",-1,214,131,194,154
+    LTEXT           "Weight kg",-1,224,146,74,10
+    EDITTEXT        IDC_WEIGHT,298,144,46,12,ES_AUTOHSCROLL
+    LTEXT           "Coolant C",-1,224,161,74,10
+    EDITTEXT        IDC_COOLANT,298,159,46,12,ES_AUTOHSCROLL
+    LTEXT           "Oil temp C",-1,224,176,74,10
+    EDITTEXT        IDC_OIL_TEMP,298,174,46,12,ES_AUTOHSCROLL
+    LTEXT           "Ambient C",-1,224,191,74,10
+    EDITTEXT        IDC_AMBIENT,298,189,46,12,ES_AUTOHSCROLL
+    LTEXT           "Air 1 kPa",-1,224,206,74,10
+    EDITTEXT        IDC_AIR1,298,204,46,12,ES_AUTOHSCROLL
+    LTEXT           "Air 2 kPa",-1,224,221,74,10
+    EDITTEXT        IDC_AIR2,298,219,46,12,ES_AUTOHSCROLL
+    LTEXT           "Brake pedal %",-1,224,236,74,10
+    EDITTEXT        IDC_BRAKE_PEDAL,298,234,46,12,ES_AUTOHSCROLL
+    LTEXT           "Alternator rpm",-1,224,251,74,10
+    EDITTEXT        IDC_ALTERNATOR,298,249,46,12,ES_AUTOHSCROLL
+    LTEXT           "Tell tale block",-1,224,266,74,10
+    EDITTEXT        IDC_TT_BLOCK,298,264,46,12,ES_AUTOHSCROLL
+    GROUPBOX        "Date / Version",-1,214,289,194,73
+    LTEXT           "Year",-1,224,304,31,10
+    EDITTEXT        IDC_YEAR,255,302,23,12,ES_AUTOHSCROLL
+    LTEXT           "Month",-1,295,304,29,10
+    EDITTEXT        IDC_MONTH,324,302,20,12,ES_AUTOHSCROLL
+    LTEXT           "Day",-1,364,304,20,10
+    EDITTEXT        IDC_DAY,384,302,19,12,ES_AUTOHSCROLL
+    LTEXT           "Hour",-1,224,319,31,10
+    EDITTEXT        IDC_HOUR,255,317,23,12,ES_AUTOHSCROLL
+    LTEXT           "Minute",-1,295,319,29,10
+    EDITTEXT        IDC_MINUTE,324,317,20,12,ES_AUTOHSCROLL
+    LTEXT           "Second",-1,351,319,31,10
+    EDITTEXT        IDC_SECOND,384,317,19,12,ES_AUTOHSCROLL
+    LTEXT           "Bus ver",-1,224,339,31,10
+    EDITTEXT        IDC_BUS_VER_MAJOR,255,337,20,12,ES_AUTOHSCROLL
+    LTEXT           ".",-1,278,339,8,10
+    EDITTEXT        IDC_BUS_VER_MINOR,285,337,14,12,ES_AUTOHSCROLL
+    LTEXT           "Truck ver",-1,320,339,38,10
+    EDITTEXT        IDC_TRUCK_VER_MAJOR,358,337,20,12,ES_AUTOHSCROLL
+    LTEXT           ".",-1,381,339,8,10
+    EDITTEXT        IDC_TRUCK_VER_MINOR,388,337,14,12,ES_AUTOHSCROLL
+    GROUPBOX        "TPMS",-1,422,26,206,154
+    LTEXT           "TPMS SA hex",-1,431,41,57,10
+    EDITTEXT        IDC_TPMS_SA,488,39,32,12,ES_AUTOHSCROLL
+    CONTROL         "TPMS enabled",IDC_TPMS_ENABLED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,536,39,74,12
+    CONTROL         "18FE5E/18FEC6",IDC_TPMS_SNIFF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,536,54,83,12
+    LTEXT           "ID",-1,470,74,24,10
+    LTEXT           "kPa",-1,509,74,33,10
+    LTEXT           "C",-1,562,74,33,10
+    LTEXT           "Tire 1",-1,431,88,33,10
+    EDITTEXT        1200,470,87,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1210,509,87,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1220,562,87,51,12,ES_AUTOHSCROLL
+    LTEXT           "Tire 2",-1,431,103,33,10
+    EDITTEXT        1201,470,102,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1211,509,102,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1221,562,102,51,12,ES_AUTOHSCROLL
+    LTEXT           "Tire 3",-1,431,118,33,10
+    EDITTEXT        1202,470,117,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1212,509,117,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1222,562,117,51,12,ES_AUTOHSCROLL
+    LTEXT           "Tire 4",-1,431,133,33,10
+    EDITTEXT        1203,470,132,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1213,509,132,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1223,562,132,51,12,ES_AUTOHSCROLL
+    LTEXT           "Tire 5",-1,431,148,33,10
+    EDITTEXT        1204,470,147,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1214,509,147,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1224,562,147,51,12,ES_AUTOHSCROLL
+    LTEXT           "Tire 6",-1,431,163,33,10
+    EDITTEXT        1205,470,162,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1215,509,162,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1225,562,162,51,12,ES_AUTOHSCROLL
+    GROUPBOX        "Tell tales status",-1,422,187,206,79
+    LTEXT           "Block 0",-1,431,202,45,10
+    EDITTEXT        1240,476,200,132,12,ES_AUTOHSCROLL
+    LTEXT           "Block 1",-1,431,217,45,10
+    EDITTEXT        1241,476,215,132,12,ES_AUTOHSCROLL
+    LTEXT           "Block 2",-1,431,232,45,10
+    EDITTEXT        1242,476,230,132,12,ES_AUTOHSCROLL
+    LTEXT           "Block 3",-1,431,247,45,10
+    EDITTEXT        1243,476,245,132,12,ES_AUTOHSCROLL
+    GROUPBOX        "Text data",-1,7,299,200,63
+    LTEXT           "VIN",-1,16,314,40,10
+    EDITTEXT        IDC_VIN,56,312,131,12,ES_AUTOHSCROLL
+    LTEXT           "Driver 1",-1,16,329,40,10
+    EDITTEXT        IDC_DRIVER1_ID,56,327,131,12,ES_AUTOHSCROLL
+    LTEXT           "Driver 2",-1,16,344,40,10
+    EDITTEXT        IDC_DRIVER2_ID,56,342,131,12,ES_AUTOHSCROLL
+    GROUPBOX        "PEAK PCAN connection",-1,422,274,206,88
+    LTEXT           "Interface",-1,429,290,31,10
+    COMBOBOX        IDC_PCAN_CHANNEL,461,288,159,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Bitrate",-1,429,308,31,10
+    COMBOBOX        IDC_PCAN_BITRATE,461,306,60,90,CBS_DROPDOWNLIST | WS_TABSTOP
+    PUSHBUTTON      "Refresh",IDC_PCAN_REFRESH,526,306,45,14
+    PUSHBUTTON      "Connect",IDC_PCAN_CONNECT,574,306,45,14
+    LTEXT           "Disconnected\r\nRX 0    TX 0    errors 0",IDC_PCAN_STATUS,429,326,191,24
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+    "#define APSTUDIO_READONLY_SYMBOLS\r\n"
+    "#include ""winres.h""\r\n"
+    "#undef APSTUDIO_READONLY_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_J1939_EMULATOR, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_J1939_EMULATOR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // Polski (Polska) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED

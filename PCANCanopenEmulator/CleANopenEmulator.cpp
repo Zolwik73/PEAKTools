@@ -11,33 +11,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "pcan_runtime.h"
+#include "resource.h"
 /* End BUSMASTER include header */
 
 #define CIA_LU_COUNT 4
-
-#define IDC_APPLY              1001
-#define IDC_DEFAULT            1002
-#define IDC_AUTO_WAVE          1003
-#define IDC_TOPMOST            1004
-#define IDC_BC_NODE            1010
-#define IDC_SDO_NODE           1011
-#define IDC_SINGLE_SDO_NODE    1012
-#define IDC_BC_HEARTBEAT       1013
-#define IDC_SDO_HEARTBEAT      1014
-#define IDC_STATUS             1015
-#define IDC_LU_BASE            1100
-#define IDC_LU_STRIDE          32
-#define IDC_LU_ENABLED         0
-#define IDC_LU_READY           1
-#define IDC_LU_ACTIVE          2
-#define IDC_LU_MOVE            3
-#define IDC_LU_WU              4
-#define IDC_LU_CU              5
-#define IDC_LU_WINDOW          6
-#define IDC_LU_BIN             7
-#define IDC_LU_POSITION        8
-#define IDC_LU_SHORT_COUNTER   9
-#define IDC_LU_TOTAL_COUNTER   10
 
 /* Start BUSMASTER global variable */
 CRITICAL_SECTION gMsgTxLock;
@@ -386,84 +363,33 @@ static void ciaApplyChecks(HWND hwnd)
     ciaUpdateTopmost(hwnd);
 }
 
-static void ciaCreateLabel(HWND hwnd, const char* text, int id, int x, int y, int w, int h)
+static void ciaPositionWindowDefault(HWND hwnd)
 {
-    CreateWindowExA(0, "STATIC", text, WS_CHILD | WS_VISIBLE, x, y, w, h, hwnd, (HMENU)(INT_PTR)id, GetModuleHandle(NULL), NULL);
-}
+    RECT rect;
+    HWND probe;
 
-static void ciaCreateEdit(HWND hwnd, int id, int x, int y, int w, int h)
-{
-    CreateWindowExA(0, "EDIT", "", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_AUTOHSCROLL, x, y, w, h, hwnd, (HMENU)(INT_PTR)id, GetModuleHandle(NULL), NULL);
-}
-
-static void ciaCreateCheck(HWND hwnd, const char* text, int id, int x, int y, int w, int h)
-{
-    CreateWindowExA(0, "BUTTON", text, WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX, x, y, w, h, hwnd, (HMENU)(INT_PTR)id, GetModuleHandle(NULL), NULL);
-}
-
-static void ciaCreateGuiControls(HWND hwnd)
-{
-    CreateWindowExA(0, "BUTTON", "Apply", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 16, 14, 78, 26, hwnd, (HMENU)IDC_APPLY, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "BUTTON", "Default", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 108, 14, 78, 26, hwnd, (HMENU)IDC_DEFAULT, GetModuleHandle(NULL), NULL);
-    ciaCreateCheck(hwnd, "Auto wave", IDC_AUTO_WAVE, 205, 18, 92, 22);
-    ciaCreateCheck(hwnd, "Always on top", IDC_TOPMOST, 565, 18, 120, 22);
-
-    CreateWindowExA(0, "BUTTON", "CANopen / Skaut defaults", WS_CHILD | WS_VISIBLE | BS_GROUPBOX, 12, 50, 700, 72, hwnd, NULL, GetModuleHandle(NULL), NULL);
-    ciaCreateLabel(hwnd, "BC node", 0, 28, 78, 58, 18);
-    ciaCreateEdit(hwnd, IDC_BC_NODE, 88, 74, 44, 22);
-    ciaCreateLabel(hwnd, "Counters SDO node", 0, 150, 78, 122, 18);
-    ciaCreateEdit(hwnd, IDC_SDO_NODE, 276, 74, 44, 22);
-    ciaCreateCheck(hwnd, "Single SDO node for LU counters", IDC_SINGLE_SDO_NODE, 342, 76, 210, 22);
-    ciaCreateCheck(hwnd, "BC heartbeat", IDC_BC_HEARTBEAT, 28, 100, 112, 18);
-    ciaCreateCheck(hwnd, "SDO node heartbeat", IDC_SDO_HEARTBEAT, 150, 100, 150, 18);
-
-    CreateWindowExA(0, "BUTTON", "LU process data and SDO counters", WS_CHILD | WS_VISIBLE | BS_GROUPBOX, 12, 132, 700, 238, hwnd, NULL, GetModuleHandle(NULL), NULL);
-    ciaCreateLabel(hwnd, "LU", 0, 28, 160, 28, 18);
-    ciaCreateLabel(hwnd, "EN", 0, 62, 160, 30, 18);
-    ciaCreateLabel(hwnd, "Ready", 0, 100, 160, 48, 18);
-    ciaCreateLabel(hwnd, "Active", 0, 154, 160, 48, 18);
-    ciaCreateLabel(hwnd, "Move", 0, 218, 160, 42, 18);
-    ciaCreateLabel(hwnd, "WU", 0, 274, 160, 32, 18);
-    ciaCreateLabel(hwnd, "CU", 0, 322, 160, 32, 18);
-    ciaCreateLabel(hwnd, "Window", 0, 370, 160, 58, 18);
-    ciaCreateLabel(hwnd, "Bin", 0, 438, 160, 36, 18);
-    ciaCreateLabel(hwnd, "Position x0.1", 0, 486, 160, 86, 18);
-    ciaCreateLabel(hwnd, "Short", 0, 586, 160, 48, 18);
-    ciaCreateLabel(hwnd, "Total", 0, 646, 160, 48, 18);
-
-    for (int i = 0; i < CIA_LU_COUNT; i++)
+    GetWindowRect(hwnd, &rect);
+    probe = CreateWindowExA(0, "STATIC", "", WS_OVERLAPPED,
+        CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left, rect.bottom - rect.top,
+        NULL, NULL, GetModuleHandle(NULL), NULL);
+    if (probe)
     {
-        int y = 184 + i * 38;
-        char label[8];
-        sprintf(label, "LU%d", i + 1);
-        ciaCreateLabel(hwnd, label, 0, 28, y + 3, 34, 18);
-        ciaCreateCheck(hwnd, "", ciaControlId(i, IDC_LU_ENABLED), 64, y, 24, 22);
-        ciaCreateCheck(hwnd, "", ciaControlId(i, IDC_LU_READY), 112, y, 24, 22);
-        ciaCreateCheck(hwnd, "", ciaControlId(i, IDC_LU_ACTIVE), 166, y, 24, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_MOVE), 214, y, 42, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_WU), 270, y, 42, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_CU), 318, y, 42, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_WINDOW), 372, y, 42, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_BIN), 432, y, 42, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_POSITION), 490, y, 76, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_SHORT_COUNTER), 584, y, 52, 22);
-        ciaCreateEdit(hwnd, ciaControlId(i, IDC_LU_TOTAL_COUNTER), 644, y, 58, 22);
+        GetWindowRect(probe, &rect);
+        DestroyWindow(probe);
+        SetWindowPos(hwnd, NULL, rect.left, rect.top, 0, 0,
+            SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
     }
-
-    CreateWindowExA(0, "BUTTON", "Status", WS_CHILD | WS_VISIBLE | BS_GROUPBOX, 12, 382, 700, 54, hwnd, NULL, GetModuleHandle(NULL), NULL);
-    ciaCreateLabel(hwnd, "", IDC_STATUS, 28, 408, 650, 18);
 }
 
-static LRESULT CALLBACK ciaGuiWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+static INT_PTR CALLBACK ciaGuiDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     int controlId;
     int notificationCode;
 
     switch (msg)
     {
-        case WM_CREATE:
-            ciaCreateGuiControls(hwnd);
-            PcanRuntimeCreateControls(hwnd, 12, 444, 700);
+        case WM_INITDIALOG:
+            PcanRuntimeInitializeControls(hwnd);
             ciaRefreshGui(hwnd);
             ciaUpdateTopmost(hwnd);
             SetTimer(hwnd, 1, 500, NULL);
@@ -510,41 +436,39 @@ static LRESULT CALLBACK ciaGuiWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 
         case WM_CLOSE:
             DestroyWindow(hwnd);
-            return 0;
+            return TRUE;
 
         case WM_DESTROY:
             KillTimer(hwnd, 1);
             gCiaGuiWindow = NULL;
             PostQuitMessage(0);
-            return 0;
+            return TRUE;
     }
-    return DefWindowProc(hwnd, msg, wParam, lParam);
+    return FALSE;
 }
 
 static DWORD WINAPI ciaGuiThreadProc(LPVOID)
 {
-    WNDCLASSA wc;
     HWND hwnd;
     MSG msg;
+    HINSTANCE instance = GetModuleHandle(NULL);
 
-    memset(&wc, 0, sizeof(wc));
-    wc.lpfnWndProc = ciaGuiWndProc;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = "CleanOpenEmulatorWindow";
-    wc.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
-    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-    RegisterClassA(&wc);
-
-    hwnd = CreateWindowExA(WS_EX_TOPMOST, wc.lpszClassName, "PCAN CANopen Emulator", WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-                          0, 0, 742, 575, NULL, NULL, wc.hInstance, NULL);
+    hwnd = CreateDialogParamA(instance, MAKEINTRESOURCEA(IDD_CANOPEN_EMULATOR),
+        NULL, ciaGuiDialogProc, 0);
+    if (!hwnd)
+        return 1;
+    ciaPositionWindowDefault(hwnd);
     gCiaGuiWindow = hwnd;
     ShowWindow(hwnd, SW_SHOW);
     UpdateWindow(hwnd);
 
     while (GetMessage(&msg, NULL, 0, 0) > 0)
     {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+        if (!IsDialogMessage(hwnd, &msg))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
     }
     return 0;
 }

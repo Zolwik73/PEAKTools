@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "pcan_runtime.h"
+#include "resource.h"
 /* End BUSMASTER include header */
 
 
@@ -89,23 +90,6 @@ GCC_EXTERN void GCC_EXPORT OnBus_Connect();
 
 #define DTC_GUI_WM_SHUTDOWN (WM_APP + 20)
 #define DTC_GUI_TIMER_STATUS 1
-#define IDC_DTC_APPLY 2001
-#define IDC_DTC_DEFAULT 2002
-#define IDC_DTC_SEND_NOW 2003
-#define IDC_DTC_CLEAR_DM2 2004
-#define IDC_DTC_AUTO_DM1 2005
-#define IDC_DTC_TOPMOST 2006
-#define IDC_DTC_STATUS 2007
-#define IDC_DTC_ECU_ENABLE_BASE 2100
-#define IDC_DTC_ECU_SA_BASE 2120
-#define IDC_DTC_ECU_LAMP_BASE 2140
-#define IDC_DTC_ECU_FLASH_BASE 2160
-#define IDC_DTC_DM1_BASE 2200
-#define IDC_DTC_DM2_BASE 2240
-#define IDC_DTC_SPN_BASE 2280
-#define IDC_DTC_FMI_BASE 2320
-#define IDC_DTC_OC_BASE 2360
-#define IDC_DTC_CM_BASE 2400
 
 static void dtcSendAllDm1();
 static void dtcSendDm2ForMask(unsigned long mask);
@@ -156,13 +140,6 @@ static void dtcSetHexByte(HWND hwnd, int id, unsigned char value)
     char text[8];
     sprintf(text, "%02X", value);
     SetDlgItemTextA(hwnd, id, text);
-}
-
-static HWND dtcCreateControl(HWND parent, const char* className, const char* text,
-    DWORD style, int x, int y, int width, int height, int id)
-{
-    return CreateWindowExA(0, className, text, WS_CHILD | WS_VISIBLE | style,
-        x, y, width, height, parent, (HMENU)(INT_PTR)id, GetModuleHandle(NULL), NULL);
 }
 
 static void dtcSetCheck(HWND hwnd, int id, unsigned char checked)
@@ -257,79 +234,31 @@ static void dtcUpdateStatus(HWND hwnd)
     SetDlgItemTextA(hwnd, IDC_DTC_STATUS, text);
 }
 
-static void dtcCreateGuiControls(HWND hwnd)
+static void dtcPositionWindowDefault(HWND hwnd)
 {
-    int i;
-    int y;
-    char text[160];
-    dtcCreateControl(hwnd, "BUTTON", "Apply", BS_PUSHBUTTON, 18, 12, 80, 28, IDC_DTC_APPLY);
-    dtcCreateControl(hwnd, "BUTTON", "Default", BS_PUSHBUTTON, 108, 12, 80, 28, IDC_DTC_DEFAULT);
-    dtcCreateControl(hwnd, "BUTTON", "Send DM1 now", BS_PUSHBUTTON, 198, 12, 105, 28, IDC_DTC_SEND_NOW);
-    dtcCreateControl(hwnd, "BUTTON", "Clear DM2", BS_PUSHBUTTON, 313, 12, 90, 28, IDC_DTC_CLEAR_DM2);
-    dtcCreateControl(hwnd, "BUTTON", "Auto DM1 (1 s)", BS_AUTOCHECKBOX, 420, 15, 125, 22, IDC_DTC_AUTO_DM1);
-    dtcCreateControl(hwnd, "BUTTON", "Always on top", BS_AUTOCHECKBOX, 565, 15, 130, 22, IDC_DTC_TOPMOST);
+    RECT rect;
+    HWND probe;
 
-    dtcCreateControl(hwnd, "BUTTON", "ECU configuration", BS_GROUPBOX, 12, 48, 930, 150, 0);
-    dtcCreateControl(hwnd, "STATIC", "ECU", SS_LEFT, 32, 72, 40, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "Enabled", SS_LEFT, 82, 72, 60, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "SA hex", SS_LEFT, 175, 72, 60, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "Lamp status", SS_LEFT, 275, 72, 90, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "Lamp flash", SS_LEFT, 410, 72, 90, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "MIL[7:6] RSL[5:4] AWL[3:2] PL[1:0]", SS_LEFT, 535, 72, 330, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "0=off/slow, 1=on/fast, 3=N/A/no flash", SS_LEFT, 535, 96, 330, 20, 0);
-    for (i = 0; i < DTC_ECU_COUNT; i++)
+    GetWindowRect(hwnd, &rect);
+    probe = CreateWindowExA(0, "STATIC", "", WS_OVERLAPPED,
+        CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left, rect.bottom - rect.top,
+        NULL, NULL, GetModuleHandle(NULL), NULL);
+    if (probe)
     {
-        y = 96 + i * 24;
-        sprintf(text, "%d", i + 1);
-        dtcCreateControl(hwnd, "STATIC", text, SS_LEFT, 42, y + 3, 30, 20, 0);
-        dtcCreateControl(hwnd, "BUTTON", "", BS_AUTOCHECKBOX, 96, y, 24, 22, IDC_DTC_ECU_ENABLE_BASE + i);
-        dtcCreateControl(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 175, y, 58, 22, IDC_DTC_ECU_SA_BASE + i);
-        dtcCreateControl(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 275, y, 72, 22, IDC_DTC_ECU_LAMP_BASE + i);
-        dtcCreateControl(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 410, y, 72, 22, IDC_DTC_ECU_FLASH_BASE + i);
+        GetWindowRect(probe, &rect);
+        DestroyWindow(probe);
+        SetWindowPos(hwnd, NULL, rect.left, rect.top, 0, 0,
+            SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
     }
-
-    dtcCreateControl(hwnd, "BUTTON", "Diagnostic Trouble Codes", BS_GROUPBOX, 12, 208, 930, 372, 0);
-    dtcCreateControl(hwnd, "STATIC", "ECU", SS_CENTER, 32, 230, 42, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "Slot", SS_CENTER, 78, 230, 42, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "DM1", SS_CENTER, 130, 230, 46, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "DM2", SS_CENTER, 180, 230, 46, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "SPN", SS_LEFT, 238, 230, 130, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "FMI", SS_CENTER, 375, 230, 52, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "OC", SS_CENTER, 437, 230, 52, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "CM", SS_CENTER, 500, 230, 52, 20, 0);
-    dtcCreateControl(hwnd, "STATIC", "DM2 after Request PGN 59904 for FECB", SS_LEFT, 570, 230, 340, 20, 0);
-    for (i = 0; i < DTC_ENTRY_COUNT; i++)
-    {
-        y = 254 + i * 19;
-        sprintf(text, "%d", i / DTC_PER_ECU + 1);
-        dtcCreateControl(hwnd, "STATIC", text, SS_CENTER, 32, y + 2, 42, 19, 0);
-        sprintf(text, "%d", i % DTC_PER_ECU + 1);
-        dtcCreateControl(hwnd, "STATIC", text, SS_CENTER, 78, y + 2, 42, 19, 0);
-        dtcCreateControl(hwnd, "BUTTON", "", BS_AUTOCHECKBOX, 145, y, 24, 20, IDC_DTC_DM1_BASE + i);
-        dtcCreateControl(hwnd, "BUTTON", "", BS_AUTOCHECKBOX, 195, y, 24, 20, IDC_DTC_DM2_BASE + i);
-        dtcCreateControl(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 238, y, 125, 20, IDC_DTC_SPN_BASE + i);
-        dtcCreateControl(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 375, y, 52, 20, IDC_DTC_FMI_BASE + i);
-        dtcCreateControl(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 437, y, 52, 20, IDC_DTC_OC_BASE + i);
-        dtcCreateControl(hwnd, "BUTTON", "", BS_AUTOCHECKBOX, 515, y, 24, 20, IDC_DTC_CM_BASE + i);
-        if (i % DTC_PER_ECU == 0)
-        {
-            sprintf(text, "DM1 18FECAxx / DM2 18FECBxx, ECU %d", i / DTC_PER_ECU + 1);
-            dtcCreateControl(hwnd, "STATIC", text, SS_LEFT, 570, y + 2, 340, 19, 0);
-        }
-        if (i == DTC_ENTRY_COUNT - 1)
-            dtcCreateControl(hwnd, "STATIC", "2+ DTCs from one ECU use TP.BAM/TP.DT.", SS_LEFT, 570, y + 2, 340, 19, 0);
-    }
-    dtcCreateControl(hwnd, "STATIC", "", SS_LEFT, 24, 586, 900, 22, IDC_DTC_STATUS);
 }
 
-static LRESULT CALLBACK dtcGuiWindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+static INT_PTR CALLBACK dtcGuiDialogProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     int i;
     switch (message)
     {
-    case WM_CREATE:
-        dtcCreateGuiControls(hwnd);
-        PcanRuntimeCreateControls(hwnd, 12, 610, 930);
+    case WM_INITDIALOG:
+        PcanRuntimeInitializeControls(hwnd);
         dtcLoadGui(hwnd, 0);
         SetTimer(hwnd, DTC_GUI_TIMER_STATUS, 500, NULL);
         SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
@@ -368,42 +297,37 @@ static LRESULT CALLBACK dtcGuiWindowProc(HWND hwnd, UINT message, WPARAM wParam,
         return 0;
     case WM_CLOSE:
         DestroyWindow(hwnd);
-        return 0;
+        return TRUE;
     case DTC_GUI_WM_SHUTDOWN:
         DestroyWindow(hwnd);
-        return 0;
+        return TRUE;
     case WM_DESTROY:
         KillTimer(hwnd, DTC_GUI_TIMER_STATUS);
         PostQuitMessage(0);
-        return 0;
+        return TRUE;
     }
-    return DefWindowProc(hwnd, message, wParam, lParam);
+    return FALSE;
 }
 
 static DWORD WINAPI dtcGuiThreadProc(LPVOID parameter)
 {
-    WNDCLASSA windowClass;
     MSG message;
     HINSTANCE instance = GetModuleHandle(NULL);
     (void)parameter;
-    ZeroMemory(&windowClass, sizeof(windowClass));
-    windowClass.lpfnWndProc = dtcGuiWindowProc;
-    windowClass.hInstance = instance;
-    windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-    windowClass.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
-    windowClass.lpszClassName = "BUSMASTER_J1939_DTC_EMULATOR";
-    RegisterClassA(&windowClass);
-    gDtcGuiWindow = CreateWindowExA(WS_EX_TOPMOST, windowClass.lpszClassName, "PCAN J1939 DTC Emulator",
-        WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-        0, 0, 970, 740, NULL, NULL, instance, NULL);
+    gDtcGuiWindow = CreateDialogParamA(instance, MAKEINTRESOURCEA(IDD_J1939_DTC_EMULATOR),
+        NULL, dtcGuiDialogProc, 0);
     if (gDtcGuiWindow)
     {
+        dtcPositionWindowDefault(gDtcGuiWindow);
         ShowWindow(gDtcGuiWindow, SW_SHOW);
         UpdateWindow(gDtcGuiWindow);
         while (GetMessage(&message, NULL, 0, 0) > 0)
         {
-            TranslateMessage(&message);
-            DispatchMessage(&message);
+            if (!IsDialogMessage(gDtcGuiWindow, &message))
+            {
+                TranslateMessage(&message);
+                DispatchMessage(&message);
+            }
         }
     }
     gDtcGuiWindow = NULL;

@@ -1,7 +1,7 @@
 # PEAK Tools
 
 Standalone Windows tools for PEAK PCAN interfaces. The repository uses a
-Visual Studio 2017 solution and keeps the bundled PCAN-Basic SDK in
+Visual Studio 2019 solution and keeps the bundled PCAN-Basic SDK in
 `ThirdParty/PCANBasic`.
 
 ## Included applications
@@ -39,7 +39,7 @@ connects or disconnects without BUSMASTER or `Wrapper_CAN`.
 - a PEAK PCAN-USB adapter and the PEAK device driver,
 - PCAN-Basic; the required headers, libraries, and DLLs are included in
   `ThirdParty/PCANBasic`,
-- Visual Studio 2017 or newer with support for the `v141` toolset.
+- Visual Studio 2019 or newer with support for the `v142` toolset.
 
 ## PCAN Sniffer usage
 

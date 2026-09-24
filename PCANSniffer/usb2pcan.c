@@ -1,6 +1,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include <windows.h>
+#include "resource.h"
 #include <commdlg.h>
 #include <mmsystem.h>
 #include <conio.h>
@@ -2423,29 +2424,6 @@ static void display_help(const char *progname)
     progname, progname, progname, progname);
 }
 
-#define IDC_GUI_MODE_SNIFF 1001
-#define IDC_GUI_MODE_SEND 1002
-#define IDC_GUI_MODE_CONVERT 1003
-#define IDC_GUI_LOG_FILE 1004
-#define IDC_GUI_BROWSE_LOG 1005
-#define IDC_GUI_INPUT_FILE 1006
-#define IDC_GUI_BROWSE_INPUT 1007
-#define IDC_GUI_SPEED 1008
-#define IDC_GUI_DATA_SPEED 1009
-#define IDC_GUI_CHANNEL 1010
-#define IDC_GUI_SECONDS 1011
-#define IDC_GUI_CLASSIC 1012
-#define IDC_GUI_LISTEN 1013
-#define IDC_GUI_BRIDGE 1014
-#define IDC_GUI_LOOP 1015
-#define IDC_GUI_FAST 1016
-#define IDC_GUI_BATCH 1017
-#define IDC_GUI_START 1018
-#define IDC_GUI_HELP 1019
-#define IDC_GUI_OUTPUT 1020
-#define IDC_GUI_STOP 1021
-#define IDC_GUI_EXTRA_ARGS 1022
-#define IDC_GUI_COMMAND_PREVIEW 1023
 #define WM_GUI_OUTPUT (WM_APP + 1)
 #define WM_GUI_PROCESS_DONE (WM_APP + 2)
 
@@ -2461,46 +2439,6 @@ static HANDLE gui_output_pipe = NULL;
 static HANDLE gui_stop_event = NULL;
 static HFONT gui_console_font = NULL;
 
-static void gui_add_label(HWND hwnd, const char *text, int x, int y, int w, int h)
-{
-  CreateWindowExA(0, "STATIC", text, WS_CHILD | WS_VISIBLE,
-                  x, y, w, h, hwnd, NULL, GetModuleHandleA(NULL), NULL);
-}
-
-static HWND gui_add_edit(HWND hwnd, int id, const char *text, int x, int y, int w, int h)
-{
-  return CreateWindowExA(WS_EX_CLIENTEDGE, "EDIT", text,
-                         WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL,
-                         x, y, w, h, hwnd, (HMENU)(INT_PTR)id,
-                         GetModuleHandleA(NULL), NULL);
-}
-
-static HWND gui_add_output(HWND hwnd, int id, int x, int y, int w, int h)
-{
-  HWND output = CreateWindowExA(WS_EX_CLIENTEDGE, "EDIT", "",
-                                WS_CHILD | WS_VISIBLE | WS_VSCROLL |
-                                ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY,
-                                x, y, w, h, hwnd, (HMENU)(INT_PTR)id,
-                                GetModuleHandleA(NULL), NULL);
-
-  SendMessageA(output, EM_SETLIMITTEXT, 1024 * 1024, 0);
-  if (gui_console_font != NULL)
-    SendMessageA(output, WM_SETFONT, (WPARAM)gui_console_font, TRUE);
-  return output;
-}
-
-static HWND gui_add_readonly_edit(HWND hwnd, int id, int x, int y, int w, int h)
-{
-  HWND edit = CreateWindowExA(WS_EX_CLIENTEDGE, "EDIT", "",
-                              WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL | ES_READONLY,
-                              x, y, w, h, hwnd, (HMENU)(INT_PTR)id,
-                              GetModuleHandleA(NULL), NULL);
-
-  if (gui_console_font != NULL)
-    SendMessageA(edit, WM_SETFONT, (WPARAM)gui_console_font, TRUE);
-  return edit;
-}
-
 static HFONT gui_create_console_font(HWND hwnd)
 {
   HDC dc = GetDC(hwnd);
@@ -2510,13 +2448,6 @@ static HFONT gui_create_console_font(HWND hwnd)
   return CreateFontA(height, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
                      DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
                      CLEARTYPE_QUALITY, FIXED_PITCH | FF_MODERN, "Consolas");
-}
-
-static HWND gui_add_button(HWND hwnd, int id, const char *text, int x, int y, int w, int h, DWORD style)
-{
-  return CreateWindowExA(0, "BUTTON", text, WS_CHILD | WS_VISIBLE | style,
-                         x, y, w, h, hwnd, (HMENU)(INT_PTR)id,
-                         GetModuleHandleA(NULL), NULL);
 }
 
 static void gui_append_arg(char *command, size_t size, const char *arg)
@@ -2908,51 +2839,37 @@ static void gui_show_help(HWND hwnd)
   gui_launch_command(hwnd, command);
 }
 
-static LRESULT CALLBACK gui_window_proc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+static void gui_position_window_default(HWND hwnd)
+{
+  RECT rect;
+  HWND probe;
+
+  GetWindowRect(hwnd, &rect);
+  probe = CreateWindowExA(0, "STATIC", "", WS_OVERLAPPED,
+                          CW_USEDEFAULT, CW_USEDEFAULT,
+                          rect.right - rect.left, rect.bottom - rect.top,
+                          NULL, NULL, GetModuleHandleA(NULL), NULL);
+  if (probe != NULL) {
+    GetWindowRect(probe, &rect);
+    DestroyWindow(probe);
+    SetWindowPos(hwnd, NULL, rect.left, rect.top, 0, 0,
+                 SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+  }
+}
+
+static INT_PTR CALLBACK gui_dialog_proc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
   switch (message) {
-  case WM_CREATE:
+  case WM_INITDIALOG:
     gui_console_font = gui_create_console_font(hwnd);
-    gui_add_button(hwnd, IDC_GUI_MODE_SNIFF, "Sniff", 18, 16, 90, 22, BS_AUTORADIOBUTTON | WS_GROUP);
-    gui_add_button(hwnd, IDC_GUI_MODE_SEND, "Send", 112, 16, 90, 22, BS_AUTORADIOBUTTON);
-    gui_add_button(hwnd, IDC_GUI_MODE_CONVERT, "Convert", 206, 16, 90, 22, BS_AUTORADIOBUTTON);
+    SendDlgItemMessageA(hwnd, IDC_GUI_OUTPUT, EM_SETLIMITTEXT, 1024 * 1024, 0);
+    SendDlgItemMessageA(hwnd, IDC_GUI_OUTPUT, WM_SETFONT, (WPARAM)gui_console_font, TRUE);
+    SendDlgItemMessageA(hwnd, IDC_GUI_COMMAND_PREVIEW, WM_SETFONT, (WPARAM)gui_console_font, TRUE);
     CheckDlgButton(hwnd, IDC_GUI_MODE_SNIFF, BST_CHECKED);
-
-    gui_add_label(hwnd, "Log file", 18, 56, 90, 18);
-    gui_add_edit(hwnd, IDC_GUI_LOG_FILE, "capture.log", 112, 52, 600, 24);
-    gui_add_button(hwnd, IDC_GUI_BROWSE_LOG, "...", 720, 52, 42, 24, BS_PUSHBUTTON);
-
-    gui_add_label(hwnd, "Input file", 18, 88, 90, 18);
-    gui_add_edit(hwnd, IDC_GUI_INPUT_FILE, "", 112, 84, 600, 24);
-    gui_add_button(hwnd, IDC_GUI_BROWSE_INPUT, "...", 720, 84, 42, 24, BS_PUSHBUTTON);
-
-    gui_add_label(hwnd, "Nominal", 18, 128, 62, 18);
-    gui_add_edit(hwnd, IDC_GUI_SPEED, "500000", 84, 124, 94, 24);
-    gui_add_label(hwnd, "Data", 198, 128, 38, 18);
-    gui_add_edit(hwnd, IDC_GUI_DATA_SPEED, "2000000", 240, 124, 100, 24);
-    gui_add_label(hwnd, "CAN", 362, 128, 34, 18);
-    gui_add_edit(hwnd, IDC_GUI_CHANNEL, "1", 400, 124, 68, 24);
-    gui_add_label(hwnd, "Seconds", 492, 128, 58, 18);
-    gui_add_edit(hwnd, IDC_GUI_SECONDS, "", 554, 124, 94, 24);
-
-    gui_add_button(hwnd, IDC_GUI_CLASSIC, "Classic CAN", 18, 166, 120, 22, BS_AUTOCHECKBOX);
-    gui_add_button(hwnd, IDC_GUI_LISTEN, "Listen only", 150, 166, 120, 22, BS_AUTOCHECKBOX);
-    gui_add_button(hwnd, IDC_GUI_BRIDGE, "Bridge CAN1 <-> CAN2", 282, 166, 180, 22, BS_AUTOCHECKBOX);
-    gui_add_button(hwnd, IDC_GUI_LOOP, "Loop send", 18, 194, 120, 22, BS_AUTOCHECKBOX);
-    gui_add_button(hwnd, IDC_GUI_FAST, "Fast replay", 150, 194, 120, 22, BS_AUTOCHECKBOX);
-    gui_add_button(hwnd, IDC_GUI_BATCH, "Batch send", 282, 194, 120, 22, BS_AUTOCHECKBOX);
-
-    gui_add_label(hwnd, "Extra parameters", 18, 232, 90, 18);
-    gui_add_edit(hwnd, IDC_GUI_EXTRA_ARGS, "", 112, 228, 650, 24);
-
-    gui_add_button(hwnd, IDC_GUI_START, "Start", 460, 268, 94, 30, BS_DEFPUSHBUTTON);
-    gui_add_button(hwnd, IDC_GUI_STOP, "Stop", 564, 268, 94, 30, BS_PUSHBUTTON);
-    gui_add_button(hwnd, IDC_GUI_HELP, "Help", 668, 268, 94, 30, BS_PUSHBUTTON);
-
-    gui_add_label(hwnd, "Command", 18, 316, 90, 18);
-    gui_add_readonly_edit(hwnd, IDC_GUI_COMMAND_PREVIEW, 18, 336, 744, 24);
-    gui_add_label(hwnd, "Console", 18, 374, 90, 18);
-    gui_add_output(hwnd, IDC_GUI_OUTPUT, 18, 396, 744, 268);
+    SetDlgItemTextA(hwnd, IDC_GUI_LOG_FILE, "capture.log");
+    SetDlgItemTextA(hwnd, IDC_GUI_SPEED, "500000");
+    SetDlgItemTextA(hwnd, IDC_GUI_DATA_SPEED, "2000000");
+    SetDlgItemTextA(hwnd, IDC_GUI_CHANNEL, "1");
     gui_set_running(hwnd, 0);
     gui_set_mode_enabled(hwnd);
     gui_update_command_preview(hwnd);
@@ -3016,7 +2933,7 @@ static LRESULT CALLBACK gui_window_proc(HWND hwnd, UINT message, WPARAM wparam, 
     if (gui_stop_event != NULL)
       SetEvent(gui_stop_event);
     DestroyWindow(hwnd);
-    return 0;
+    return TRUE;
 
   case WM_GUI_OUTPUT:
     if (lparam != 0) {
@@ -3035,42 +2952,32 @@ static LRESULT CALLBACK gui_window_proc(HWND hwnd, UINT message, WPARAM wparam, 
       gui_console_font = NULL;
     }
     PostQuitMessage(0);
-    return 0;
+    return TRUE;
   }
 
-  return DefWindowProcA(hwnd, message, wparam, lparam);
+  return FALSE;
 }
 
 static int run_gui(void)
 {
-  WNDCLASSA wc;
   HWND hwnd;
   MSG message;
   HINSTANCE instance = GetModuleHandleA(NULL);
 
-  SecureZeroMemory(&wc, sizeof(wc));
-  wc.lpfnWndProc = gui_window_proc;
-  wc.hInstance = instance;
-  wc.lpszClassName = "PCANSnifferGui";
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
-
-  if (!RegisterClassA(&wc))
-    return EXIT_FAILURE;
-
-  hwnd = CreateWindowExA(0, wc.lpszClassName, "PCAN Sniffer",
-                         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-                         CW_USEDEFAULT, CW_USEDEFAULT, 804, 720,
-                         NULL, NULL, instance, NULL);
+  hwnd = CreateDialogParamA(instance, MAKEINTRESOURCEA(IDD_PCAN_SNIFFER),
+                            NULL, gui_dialog_proc, 0);
   if (hwnd == NULL)
     return EXIT_FAILURE;
 
+  gui_position_window_default(hwnd);
   ShowWindow(hwnd, SW_SHOW);
   UpdateWindow(hwnd);
 
   while (GetMessageA(&message, NULL, 0, 0) > 0) {
-    TranslateMessage(&message);
-    DispatchMessageA(&message);
+    if (!IsDialogMessageA(hwnd, &message)) {
+      TranslateMessage(&message);
+      DispatchMessageA(&message);
+    }
   }
 
   return (int)message.wParam;

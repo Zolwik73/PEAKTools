@@ -37,6 +37,6 @@ bool PcanRuntimeInitialize(const char* applicationName,
     PCAN_RUNTIME_CALLBACK connectedCallback,
     const PCAN_RUNTIME_TIMER* timers, unsigned int timerCount);
 void PcanRuntimeShutdown();
-void PcanRuntimeCreateControls(HWND parent, int x, int y, int width);
+void PcanRuntimeInitializeControls(HWND parent);
 bool PcanRuntimeHandleCommand(HWND parent, int controlId, int notificationCode);
 void PcanRuntimeRefreshStatus(HWND parent);

@@ -9,6 +9,7 @@
 *.opendb
 *.sdf
 *.ipch
+*.aps
 
 # Build output directories at the solution root
 /Debug/

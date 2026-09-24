@@ -329,53 +329,8 @@ void PcanRuntimeShutdown()
     DeleteCriticalSection(&gRuntimeLock);
 }
 
-void PcanRuntimeCreateControls(HWND parent, int x, int y, int width)
+void PcanRuntimeInitializeControls(HWND parent)
 {
-    int comboWidth = width - 430;
-    int bitrateX;
-    if (width < 600)
-    {
-        CreateWindowExA(0, "BUTTON", "PEAK PCAN connection", WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
-            x, y, width, 128, parent, NULL, GetModuleHandle(NULL), NULL);
-        CreateWindowExA(0, "STATIC", "Interface", WS_CHILD | WS_VISIBLE,
-            x + 12, y + 25, 54, 20, parent, NULL, GetModuleHandle(NULL), NULL);
-        CreateWindowExA(0, "COMBOBOX", "", WS_CHILD | WS_VISIBLE | WS_BORDER | CBS_DROPDOWNLIST | WS_VSCROLL,
-            x + 68, y + 21, width - 80, 200, parent, (HMENU)IDC_PCAN_CHANNEL, GetModuleHandle(NULL), NULL);
-        CreateWindowExA(0, "STATIC", "Bitrate", WS_CHILD | WS_VISIBLE,
-            x + 12, y + 59, 54, 20, parent, NULL, GetModuleHandle(NULL), NULL);
-        CreateWindowExA(0, "COMBOBOX", "", WS_CHILD | WS_VISIBLE | WS_BORDER | CBS_DROPDOWNLIST,
-            x + 68, y + 55, 105, 180, parent, (HMENU)IDC_PCAN_BITRATE, GetModuleHandle(NULL), NULL);
-        CreateWindowExA(0, "BUTTON", "Refresh", WS_CHILD | WS_VISIBLE,
-            x + width - 188, y + 54, 78, 25, parent, (HMENU)IDC_PCAN_REFRESH, GetModuleHandle(NULL), NULL);
-        CreateWindowExA(0, "BUTTON", "Connect", WS_CHILD | WS_VISIBLE,
-            x + width - 102, y + 54, 90, 25, parent, (HMENU)IDC_PCAN_CONNECT, GetModuleHandle(NULL), NULL);
-        CreateWindowExA(0, "STATIC", "Disconnected", WS_CHILD | WS_VISIBLE,
-            x + 12, y + 92, width - 24, 20, parent, (HMENU)IDC_PCAN_STATUS, GetModuleHandle(NULL), NULL);
-        runtimePopulateChannels(parent);
-        runtimePopulateBitrates(parent);
-        runtimeUpdateControls(parent);
-        return;
-    }
-    if (comboWidth < 210)
-        comboWidth = 210;
-    bitrateX = x + 68 + comboWidth + 12;
-
-    CreateWindowExA(0, "BUTTON", "PEAK PCAN connection", WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
-        x, y, width, 84, parent, NULL, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "STATIC", "Interface", WS_CHILD | WS_VISIBLE,
-        x + 12, y + 25, 54, 20, parent, NULL, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "COMBOBOX", "", WS_CHILD | WS_VISIBLE | WS_BORDER | CBS_DROPDOWNLIST | WS_VSCROLL,
-        x + 68, y + 21, comboWidth, 200, parent, (HMENU)IDC_PCAN_CHANNEL, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "STATIC", "Bitrate", WS_CHILD | WS_VISIBLE,
-        bitrateX, y + 25, 48, 20, parent, NULL, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "COMBOBOX", "", WS_CHILD | WS_VISIBLE | WS_BORDER | CBS_DROPDOWNLIST,
-        bitrateX + 48, y + 21, 105, 180, parent, (HMENU)IDC_PCAN_BITRATE, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "BUTTON", "Refresh", WS_CHILD | WS_VISIBLE,
-        x + width - 188, y + 20, 78, 25, parent, (HMENU)IDC_PCAN_REFRESH, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "BUTTON", "Connect", WS_CHILD | WS_VISIBLE,
-        x + width - 102, y + 20, 90, 25, parent, (HMENU)IDC_PCAN_CONNECT, GetModuleHandle(NULL), NULL);
-    CreateWindowExA(0, "STATIC", "Disconnected", WS_CHILD | WS_VISIBLE,
-        x + 12, y + 55, width - 24, 20, parent, (HMENU)IDC_PCAN_STATUS, GetModuleHandle(NULL), NULL);
     runtimePopulateChannels(parent);
     runtimePopulateBitrates(parent);
     runtimeUpdateControls(parent);

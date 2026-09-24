@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "pcan_runtime.h"
+#include "resource.h"
 /* End BUSMASTER include header */
 
 
@@ -126,68 +127,6 @@ static unsigned char fmsClampU8(int value, int minValue, int maxValue);
 
 #define FMS_GUI_WM_SHUTDOWN (WM_APP + 10)
 #define FMS_GUI_TIMER_REFRESH 1
-#define IDC_APPLY 1001
-#define IDC_DEFAULT 1002
-#define IDC_STATUS 1003
-#define IDC_AUTO_WAVE 1004
-#define IDC_ENGINE_RUNNING 1005
-#define IDC_BRAKE 1006
-#define IDC_CLUTCH 1007
-#define IDC_CRUISE 1008
-#define IDC_PTO 1009
-#define IDC_PARKING 1010
-#define IDC_MOTION 1011
-#define IDC_OVERSPEED 1012
-#define IDC_DRIVER1_CARD 1013
-#define IDC_DRIVER2_CARD 1014
-#define IDC_FRONT_DOOR 1015
-#define IDC_MIDDLE_DOOR 1016
-#define IDC_REAR_DOOR 1017
-#define IDC_TPMS_ENABLED 1018
-#define IDC_TPMS_SNIFF 1019
-#define IDC_TOPMOST 1020
-#define IDC_SA 1100
-#define IDC_TPMS_SA 1101
-#define IDC_RPM 1102
-#define IDC_TORQUE 1103
-#define IDC_LOAD 1104
-#define IDC_ACCEL 1105
-#define IDC_SPEED 1106
-#define IDC_TACHO_SPEED 1107
-#define IDC_FUEL_USED 1108
-#define IDC_FUEL_RATE 1109
-#define IDC_FUEL_ECONOMY 1110
-#define IDC_FUEL_LEVEL 1111
-#define IDC_DEF_LEVEL 1112
-#define IDC_ENGINE_HOURS 1113
-#define IDC_DISTANCE 1114
-#define IDC_SERVICE_DISTANCE 1115
-#define IDC_WEIGHT 1116
-#define IDC_COOLANT 1117
-#define IDC_AMBIENT 1118
-#define IDC_AIR1 1119
-#define IDC_AIR2 1120
-#define IDC_ALTERNATOR 1121
-#define IDC_TT_BLOCK 1122
-#define IDC_YEAR 1123
-#define IDC_MONTH 1124
-#define IDC_DAY 1125
-#define IDC_HOUR 1126
-#define IDC_MINUTE 1127
-#define IDC_SECOND 1128
-#define IDC_BUS_VER_MAJOR 1129
-#define IDC_BUS_VER_MINOR 1130
-#define IDC_TRUCK_VER_MAJOR 1131
-#define IDC_TRUCK_VER_MINOR 1132
-#define IDC_VIN 1133
-#define IDC_DRIVER1_ID 1134
-#define IDC_DRIVER2_ID 1135
-#define IDC_OIL_TEMP 1136
-#define IDC_BRAKE_PEDAL 1137
-#define IDC_TIRE_LOCATION_BASE 1200
-#define IDC_TIRE_PRESSURE_BASE 1210
-#define IDC_TIRE_TEMP_BASE 1220
-#define IDC_TT_STATUS_BASE 1240
 
 static HWND fmsGuiGetItem(HWND hwnd, int controlId)
 {
@@ -414,125 +353,6 @@ static void fmsGuiRefresh(HWND hwnd)
     fmsGuiUpdateStatus(hwnd);
 }
 
-static HWND fmsGuiCreateChild(HWND hwnd, const char* className, const char* text, DWORD style, int x, int y, int w, int h, int controlId)
-{
-    return CreateWindowExA(0, className, text, WS_CHILD | WS_VISIBLE | style, x, y, w, h, hwnd, (HMENU)(INT_PTR)controlId, GetModuleHandle(NULL), NULL);
-}
-
-static void fmsGuiCreateLabel(HWND hwnd, const char* text, int x, int y, int w)
-{
-    fmsGuiCreateChild(hwnd, "STATIC", text, 0, x, y + 3, w, 20, 0);
-}
-
-static void fmsGuiCreateEditRow(HWND hwnd, const char* label, int controlId, int x, int y, int labelW, int editW)
-{
-    fmsGuiCreateLabel(hwnd, label, x, y, labelW);
-    fmsGuiCreateChild(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, x + labelW, y, editW, 22, controlId);
-}
-
-static void fmsGuiCreateGroup(HWND hwnd, const char* label, int x, int y, int w, int h)
-{
-    fmsGuiCreateChild(hwnd, "BUTTON", label, BS_GROUPBOX, x, y, w, h, 0);
-}
-
-static void fmsGuiCreateControls(HWND hwnd)
-{
-    int i;
-    char text[32];
-
-    fmsGuiCreateChild(hwnd, "BUTTON", "Apply", 0, 18, 12, 80, 28, IDC_APPLY);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Default", 0, 108, 12, 80, 28, IDC_DEFAULT);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Auto wave", BS_AUTOCHECKBOX, 205, 15, 120, 24, IDC_AUTO_WAVE);
-    fmsGuiCreateChild(hwnd, "STATIC", "", 0, 345, 18, 360, 22, IDC_STATUS);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Always on top", BS_AUTOCHECKBOX, 930, 15, 150, 22, IDC_TOPMOST);
-
-    fmsGuiCreateGroup(hwnd, "Engine / Vehicle", 12, 48, 350, 232);
-    fmsGuiCreateEditRow(hwnd, "FMS SA hex", IDC_SA, 28, 74, 110, 70);
-    fmsGuiCreateEditRow(hwnd, "RPM", IDC_RPM, 28, 102, 110, 70);
-    fmsGuiCreateEditRow(hwnd, "Torque %", IDC_TORQUE, 28, 130, 110, 70);
-    fmsGuiCreateEditRow(hwnd, "Load %", IDC_LOAD, 28, 158, 110, 70);
-    fmsGuiCreateEditRow(hwnd, "Accelerator %", IDC_ACCEL, 28, 186, 110, 70);
-    fmsGuiCreateEditRow(hwnd, "Speed km/h", IDC_SPEED, 28, 214, 110, 70);
-    fmsGuiCreateEditRow(hwnd, "Tacho km/h", IDC_TACHO_SPEED, 28, 242, 110, 70);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Engine running", BS_AUTOCHECKBOX, 220, 74, 130, 22, IDC_ENGINE_RUNNING);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Vehicle motion", BS_AUTOCHECKBOX, 220, 102, 130, 22, IDC_MOTION);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Overspeed", BS_AUTOCHECKBOX, 220, 130, 130, 22, IDC_OVERSPEED);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Cruise", BS_AUTOCHECKBOX, 220, 158, 130, 22, IDC_CRUISE);
-
-    fmsGuiCreateGroup(hwnd, "Switches / Doors", 375, 48, 340, 188);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Brake", BS_AUTOCHECKBOX, 392, 76, 100, 22, IDC_BRAKE);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Clutch", BS_AUTOCHECKBOX, 392, 104, 100, 22, IDC_CLUTCH);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Parking brake", BS_AUTOCHECKBOX, 392, 132, 130, 22, IDC_PARKING);
-    fmsGuiCreateChild(hwnd, "BUTTON", "PTO", BS_AUTOCHECKBOX, 392, 160, 100, 22, IDC_PTO);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Driver 1 card", BS_AUTOCHECKBOX, 545, 76, 140, 22, IDC_DRIVER1_CARD);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Driver 2 card", BS_AUTOCHECKBOX, 545, 104, 140, 22, IDC_DRIVER2_CARD);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Front door", BS_AUTOCHECKBOX, 545, 132, 140, 22, IDC_FRONT_DOOR);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Middle door", BS_AUTOCHECKBOX, 545, 160, 140, 22, IDC_MIDDLE_DOOR);
-    fmsGuiCreateChild(hwnd, "BUTTON", "Rear door", BS_AUTOCHECKBOX, 545, 188, 140, 22, IDC_REAR_DOOR);
-
-    fmsGuiCreateGroup(hwnd, "Fuel / Counters", 12, 290, 350, 260);
-    fmsGuiCreateEditRow(hwnd, "Fuel used L", IDC_FUEL_USED, 28, 316, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Fuel rate L/h", IDC_FUEL_RATE, 28, 344, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Fuel economy", IDC_FUEL_ECONOMY, 28, 372, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Fuel level %", IDC_FUEL_LEVEL, 28, 400, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "DEF level %", IDC_DEF_LEVEL, 28, 428, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Engine hours", IDC_ENGINE_HOURS, 28, 456, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Distance km", IDC_DISTANCE, 28, 484, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Service km", IDC_SERVICE_DISTANCE, 28, 512, 130, 80);
-
-    fmsGuiCreateGroup(hwnd, "Environment / Vehicle Data", 375, 246, 340, 288);
-    fmsGuiCreateEditRow(hwnd, "Weight kg", IDC_WEIGHT, 392, 272, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Coolant C", IDC_COOLANT, 392, 300, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Oil temp C", IDC_OIL_TEMP, 392, 328, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Ambient C", IDC_AMBIENT, 392, 356, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Air 1 kPa", IDC_AIR1, 392, 384, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Air 2 kPa", IDC_AIR2, 392, 412, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Brake pedal %", IDC_BRAKE_PEDAL, 392, 440, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Alternator rpm", IDC_ALTERNATOR, 392, 468, 130, 80);
-    fmsGuiCreateEditRow(hwnd, "Tell tale block", IDC_TT_BLOCK, 392, 496, 130, 80);
-
-    fmsGuiCreateGroup(hwnd, "Date / Version", 375, 542, 340, 126);
-    fmsGuiCreateEditRow(hwnd, "Year", IDC_YEAR, 391, 568, 55, 40);
-    fmsGuiCreateEditRow(hwnd, "Month", IDC_MONTH, 517, 568, 50, 35);
-    fmsGuiCreateEditRow(hwnd, "Day", IDC_DAY, 637, 568, 35, 34);
-    fmsGuiCreateEditRow(hwnd, "Hour", IDC_HOUR, 391, 596, 55, 40);
-    fmsGuiCreateEditRow(hwnd, "Minute", IDC_MINUTE, 517, 596, 50, 35);
-    fmsGuiCreateEditRow(hwnd, "Second", IDC_SECOND, 627, 596, 55, 25);
-    fmsGuiCreateEditRow(hwnd, "Bus ver", IDC_BUS_VER_MAJOR, 391, 634, 55, 35);
-    fmsGuiCreateEditRow(hwnd, ".", IDC_BUS_VER_MINOR, 487, 634, 12, 25);
-    fmsGuiCreateEditRow(hwnd, "Truck ver", IDC_TRUCK_VER_MAJOR, 561, 634, 65, 35);
-    fmsGuiCreateEditRow(hwnd, ".", IDC_TRUCK_VER_MINOR, 667, 634, 12, 25);
-
-    fmsGuiCreateGroup(hwnd, "TPMS", 738, 48, 360, 288);
-    fmsGuiCreateEditRow(hwnd, "TPMS SA hex", IDC_TPMS_SA, 755, 74, 100, 55);
-    fmsGuiCreateChild(hwnd, "BUTTON", "TPMS enabled", BS_AUTOCHECKBOX, 938, 74, 130, 22, IDC_TPMS_ENABLED);
-    fmsGuiCreateChild(hwnd, "BUTTON", "18FE5E/18FEC6", BS_AUTOCHECKBOX, 938, 102, 145, 22, IDC_TPMS_SNIFF);
-    fmsGuiCreateLabel(hwnd, "ID", 823, 140, 42);
-    fmsGuiCreateLabel(hwnd, "kPa", 891, 140, 58);
-    fmsGuiCreateLabel(hwnd, "C", 984, 140, 58);
-    for (i = 0; i < 6; i++)
-    {
-        sprintf(text, "Tire %d", i + 1);
-        fmsGuiCreateLabel(hwnd, text, 755, 166 + i * 28, 58);
-        fmsGuiCreateChild(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 823, 163 + i * 28, 52, 22, IDC_TIRE_LOCATION_BASE + i);
-        fmsGuiCreateChild(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 891, 163 + i * 28, 76, 22, IDC_TIRE_PRESSURE_BASE + i);
-        fmsGuiCreateChild(hwnd, "EDIT", "", WS_BORDER | ES_AUTOHSCROLL, 984, 163 + i * 28, 90, 22, IDC_TIRE_TEMP_BASE + i);
-    }
-
-    fmsGuiCreateGroup(hwnd, "Text data", 12, 560, 350, 112);
-    fmsGuiCreateEditRow(hwnd, "VIN", IDC_VIN, 28, 586, 70, 230);
-    fmsGuiCreateEditRow(hwnd, "Driver 1", IDC_DRIVER1_ID, 28, 614, 70, 230);
-    fmsGuiCreateEditRow(hwnd, "Driver 2", IDC_DRIVER2_ID, 28, 642, 70, 230);
-
-    fmsGuiCreateGroup(hwnd, "Tell tales status", 738, 352, 360, 148);
-    fmsGuiCreateEditRow(hwnd, "Block 0", IDC_TT_STATUS_BASE + 0, 755, 380, 78, 230);
-    fmsGuiCreateEditRow(hwnd, "Block 1", IDC_TT_STATUS_BASE + 1, 755, 408, 78, 230);
-    fmsGuiCreateEditRow(hwnd, "Block 2", IDC_TT_STATUS_BASE + 2, 755, 436, 78, 230);
-    fmsGuiCreateEditRow(hwnd, "Block 3", IDC_TT_STATUS_BASE + 3, 755, 464, 78, 230);
-
-    fmsGuiRefresh(hwnd);
-}
-
 static void fmsGuiReadTellTales(HWND hwnd, int controlId, unsigned char* status)
 {
     char text[64];
@@ -581,6 +401,24 @@ static void fmsGuiApplyTopmost(HWND hwnd)
 
     SetWindowPos(hwnd, topmost ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0,
         SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+}
+
+static void fmsGuiPositionWindowDefault(HWND hwnd)
+{
+    RECT rect;
+    HWND probe;
+
+    GetWindowRect(hwnd, &rect);
+    probe = CreateWindowExA(0, "STATIC", "", WS_OVERLAPPED,
+        CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left, rect.bottom - rect.top,
+        NULL, NULL, GetModuleHandle(NULL), NULL);
+    if (probe)
+    {
+        GetWindowRect(probe, &rect);
+        DestroyWindow(probe);
+        SetWindowPos(hwnd, NULL, rect.left, rect.top, 0, 0,
+            SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+    }
 }
 
 static void fmsGuiApplyChecks(HWND hwnd)
@@ -811,16 +649,16 @@ static void fmsGuiApply(HWND hwnd)
     fmsGuiRefresh(hwnd);
 }
 
-static LRESULT CALLBACK fmsGuiWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+static INT_PTR CALLBACK fmsGuiDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     int controlId;
     int notificationCode;
 
     switch (msg)
     {
-    case WM_CREATE:
-        fmsGuiCreateControls(hwnd);
-        PcanRuntimeCreateControls(hwnd, 738, 514, 360);
+    case WM_INITDIALOG:
+        PcanRuntimeInitializeControls(hwnd);
+        fmsGuiRefresh(hwnd);
         SetTimer(hwnd, FMS_GUI_TIMER_REFRESH, 250, NULL);
         return 0;
 
@@ -858,49 +696,44 @@ static LRESULT CALLBACK fmsGuiWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 
     case WM_CLOSE:
         DestroyWindow(hwnd);
-        return 0;
+        return TRUE;
 
     case FMS_GUI_WM_SHUTDOWN:
         DestroyWindow(hwnd);
-        return 0;
+        return TRUE;
 
     case WM_DESTROY:
         KillTimer(hwnd, FMS_GUI_TIMER_REFRESH);
         gFmsGuiWindow = NULL;
         PostQuitMessage(0);
-        return 0;
+        return TRUE;
     }
 
-    return DefWindowProc(hwnd, msg, wParam, lParam);
+    return FALSE;
 }
 
 static DWORD WINAPI fmsGuiThreadProc(LPVOID)
 {
-    WNDCLASSA wc;
     MSG msg;
+    HINSTANCE instance = GetModuleHandle(NULL);
 
-    ZeroMemory(&wc, sizeof(wc));
-    wc.lpfnWndProc = fmsGuiWndProc;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
-    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wc.lpszClassName = "FmsJ1939EmulatorWindow";
-    RegisterClassA(&wc);
+    gFmsGuiWindow = CreateDialogParamA(instance, MAKEINTRESOURCEA(IDD_J1939_EMULATOR),
+        NULL, fmsGuiDialogProc, 0);
 
-    gFmsGuiWindow = CreateWindowExA(WS_EX_TOPMOST, wc.lpszClassName, "PCAN J1939 Emulator",
-        WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-        0, 0, 1125, 740, NULL, NULL, wc.hInstance, NULL);
+    if (!gFmsGuiWindow)
+        return 1;
+    fmsGuiPositionWindowDefault(gFmsGuiWindow);
 
-    if (gFmsGuiWindow)
-    {
-        ShowWindow(gFmsGuiWindow, SW_SHOW);
-        UpdateWindow(gFmsGuiWindow);
-    }
+    ShowWindow(gFmsGuiWindow, SW_SHOW);
+    UpdateWindow(gFmsGuiWindow);
 
     while (GetMessage(&msg, NULL, 0, 0) > 0)
     {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+        if (!IsDialogMessage(gFmsGuiWindow, &msg))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
     }
 
     return 0;

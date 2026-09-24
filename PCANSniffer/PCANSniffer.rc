@@ -1,0 +1,80 @@
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+IDD_PCAN_SNIFFER DIALOGEX 0, 0, 459, 365
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "PCAN Sniffer"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Sniff", IDC_GUI_MODE_SNIFF, "Button", BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 10, 9, 52, 12
+    CONTROL         "Send", IDC_GUI_MODE_SEND, "Button", BS_AUTORADIOBUTTON | WS_TABSTOP, 64, 9, 52, 12
+    CONTROL         "Convert", IDC_GUI_MODE_CONVERT, "Button", BS_AUTORADIOBUTTON | WS_TABSTOP, 118, 9, 52, 12
+
+    LTEXT           "Log file", -1, 10, 30, 52, 10
+    EDITTEXT        IDC_GUI_LOG_FILE, 64, 28, 343, 13, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDC_GUI_BROWSE_LOG, 411, 28, 24, 13
+    LTEXT           "Input file", -1, 10, 47, 52, 10
+    EDITTEXT        IDC_GUI_INPUT_FILE, 64, 45, 343, 13, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDC_GUI_BROWSE_INPUT, 411, 45, 24, 13
+
+    LTEXT           "Nominal", -1, 10, 68, 36, 10
+    EDITTEXT        IDC_GUI_SPEED, 48, 66, 54, 13, ES_AUTOHSCROLL
+    LTEXT           "Data", -1, 113, 68, 22, 10
+    EDITTEXT        IDC_GUI_DATA_SPEED, 137, 66, 57, 13, ES_AUTOHSCROLL
+    LTEXT           "CAN", -1, 207, 68, 20, 10
+    EDITTEXT        IDC_GUI_CHANNEL, 229, 66, 39, 13, ES_AUTOHSCROLL
+    LTEXT           "Seconds", -1, 281, 68, 34, 10
+    EDITTEXT        IDC_GUI_SECONDS, 317, 66, 54, 13, ES_AUTOHSCROLL
+
+    AUTOCHECKBOX    "Classic CAN", IDC_GUI_CLASSIC, 10, 89, 69, 12
+    AUTOCHECKBOX    "Listen only", IDC_GUI_LISTEN, 86, 89, 69, 12
+    AUTOCHECKBOX    "Bridge CAN1 <-> CAN2", IDC_GUI_BRIDGE, 161, 89, 103, 12
+    AUTOCHECKBOX    "Loop send", IDC_GUI_LOOP, 10, 104, 69, 12
+    AUTOCHECKBOX    "Fast replay", IDC_GUI_FAST, 86, 104, 69, 12
+    AUTOCHECKBOX    "Batch send", IDC_GUI_BATCH, 161, 104, 69, 12
+
+    LTEXT           "Extra parameters", -1, 10, 124, 52, 10
+    EDITTEXT        IDC_GUI_EXTRA_ARGS, 64, 122, 371, 13, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Start", IDC_GUI_START, 263, 143, 54, 16
+    PUSHBUTTON      "Stop", IDC_GUI_STOP, 322, 143, 54, 16
+    PUSHBUTTON      "Help", IDC_GUI_HELP, 382, 143, 54, 16
+
+    LTEXT           "Command", -1, 10, 168, 52, 10
+    EDITTEXT        IDC_GUI_COMMAND_PREVIEW, 10, 179, 425, 13, ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Console", -1, 10, 199, 52, 10
+    EDITTEXT        IDC_GUI_OUTPUT, 10, 211, 425, 143, ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+END
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+    "#define APSTUDIO_READONLY_SYMBOLS\r\n"
+    "#include ""winres.h""\r\n"
+    "#undef APSTUDIO_READONLY_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE
+BEGIN
+    "\r\n"
+    "\0"
+END
+#endif
