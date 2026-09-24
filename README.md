@@ -105,11 +105,11 @@ Open `PEAKTools.sln`, select the `x64` or `Win32` platform and the `Debug` or
 the matching `PCANBasic.dll` into the output directory, for example:
 
 ```text
-x64\Release\USB2PCAN.exe
+bin\x64\Release\PCANSniffer\USB2PCAN.exe
 bin\x64\Release\PCANCanopenEmulator\PCANCanopenEmulator.exe
 bin\x64\Release\PCANJ1939Emulator\PCANJ1939Emulator.exe
 bin\x64\Release\PCANJ1939DtcEmulator\PCANJ1939DtcEmulator.exe
-x64\Release\PCANBasic.dll
+bin\x64\Release\PCANSniffer\PCANBasic.dll
 ```
 
 PEAK device instances can be selected with `--device`. For device index `0`,
