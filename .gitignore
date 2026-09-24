@@ -15,6 +15,10 @@
 /Release/
 /x64/
 /Win32/
+/PCANSniffer/Debug/
+/PCANSniffer/Release/
+/PCANSniffer/x64/
+/PCANSniffer/Win32/
 
 # C/C++ build artifacts
 *.obj

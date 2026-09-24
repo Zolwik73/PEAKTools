@@ -1,4 +1,12 @@
-# PCAN Sniffer
+# PEAK Tools
+
+Standalone Windows tools for PEAK PCAN interfaces. The repository uses a
+Visual Studio 2017 solution and keeps the bundled PCAN-Basic SDK in
+`ThirdParty/PCANBasic`.
+
+## Included applications
+
+### PCAN Sniffer
 
 A lightweight CAN/CAN-FD sniffer, log replayer, and converter for PEAK
 adapters, built on the PCAN-Basic API. The executable is still named
@@ -16,7 +24,8 @@ adapters, built on the PCAN-Basic API. The executable is still named
 
 - Windows,
 - a PEAK PCAN-USB adapter and the PEAK device driver,
-- PCAN-Basic; the required headers, libraries, and DLLs are included in `LIB`,
+- PCAN-Basic; the required headers, libraries, and DLLs are included in
+  `ThirdParty/PCANBasic`,
 - Visual Studio 2017 or newer with support for the `v141` toolset.
 
 ## GUI
@@ -59,7 +68,7 @@ list.
 
 ## Building
 
-Open `USB2PCAN.sln`, select the `x64` or `Win32` platform and the `Debug` or
+Open `PEAKTools.sln`, select the `x64` or `Win32` platform and the `Debug` or
 `Release` configuration, then build the solution. The post-build step copies
 the matching `PCANBasic.dll` into the output directory, for example:
 
