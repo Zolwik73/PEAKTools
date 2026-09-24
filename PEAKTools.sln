@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28307.1401
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PCANSniffer", "PCANSniffer\USB2PCAN.vcxproj", "{FEAE4393-9056-4600-90C6-9A739E3E8CF4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PCANCanopenEmulator", "PCANCanopenEmulator\PCANCanopenEmulator.vcxproj", "{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PCANJ1939Emulator", "PCANJ1939Emulator\PCANJ1939Emulator.vcxproj", "{28D76A0A-B24B-4A62-8922-846CE9D5714D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PCANJ1939DtcEmulator", "PCANJ1939DtcEmulator\PCANJ1939DtcEmulator.vcxproj", "{BA8D742B-78EF-4E00-811A-D683985D34B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +27,30 @@ Global
 		{FEAE4393-9056-4600-90C6-9A739E3E8CF4}.Release|x64.Build.0 = Release|x64
 		{FEAE4393-9056-4600-90C6-9A739E3E8CF4}.Release|x86.ActiveCfg = Release|Win32
 		{FEAE4393-9056-4600-90C6-9A739E3E8CF4}.Release|x86.Build.0 = Release|Win32
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Debug|x64.ActiveCfg = Debug|x64
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Debug|x64.Build.0 = Debug|x64
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Debug|x86.ActiveCfg = Debug|Win32
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Debug|x86.Build.0 = Debug|Win32
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Release|x64.ActiveCfg = Release|x64
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Release|x64.Build.0 = Release|x64
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Release|x86.ActiveCfg = Release|Win32
+		{7D7DBF1A-41BA-4FD8-9C9A-C0C33764935C}.Release|x86.Build.0 = Release|Win32
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Debug|x64.ActiveCfg = Debug|x64
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Debug|x64.Build.0 = Debug|x64
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Debug|x86.ActiveCfg = Debug|Win32
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Debug|x86.Build.0 = Debug|Win32
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Release|x64.ActiveCfg = Release|x64
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Release|x64.Build.0 = Release|x64
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Release|x86.ActiveCfg = Release|Win32
+		{28D76A0A-B24B-4A62-8922-846CE9D5714D}.Release|x86.Build.0 = Release|Win32
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Debug|x64.ActiveCfg = Debug|x64
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Debug|x64.Build.0 = Debug|x64
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Debug|x86.ActiveCfg = Debug|Win32
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Debug|x86.Build.0 = Debug|Win32
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Release|x64.ActiveCfg = Release|x64
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Release|x64.Build.0 = Release|x64
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Release|x86.ActiveCfg = Release|Win32
+		{BA8D742B-78EF-4E00-811A-D683985D34B5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

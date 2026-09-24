@@ -12,13 +12,26 @@ A lightweight CAN/CAN-FD sniffer, log replayer, and converter for PEAK
 adapters, built on the PCAN-Basic API. The executable is still named
 `USB2PCAN.exe` for compatibility with the original version of the project.
 
-## Features
+### PCAN CANopen Emulator
 
-- captures CAN and CAN-FD frames in a `candump -L` compatible format,
-- replays captured frames with original timing or at full speed,
-- bridges CAN1 and CAN2 in both directions,
-- converts column logs, PCAN-View TRC, GVRET CSV, and SavvyCAN files,
-- provides both a native Windows GUI and a command-line interface.
+`PCANCanopenEmulator.exe` emulates four CANopen/CiA 422 load units. It sends
+process data and heartbeat frames, handles the implemented SDO requests, and
+provides editable operating states and counters.
+
+### PCAN J1939 Emulator
+
+`PCANJ1939Emulator.exe` generates FMS/J1939 vehicle data, including engine,
+vehicle, fuel, environment, driver, tell-tale, text, and TPMS information.
+
+### PCAN J1939 DTC Emulator
+
+`PCANJ1939DtcEmulator.exe` generates configurable DM1 and DM2 diagnostic
+messages for four ECUs. It supports address claims, request handling, and
+J1939 BAM transport for multi-packet diagnostic messages.
+
+Each emulator is a standalone project with its own PCAN-Basic integration.
+Its GUI enumerates attached PEAK channels, selects a Classic CAN bitrate, and
+connects or disconnects without BUSMASTER or `Wrapper_CAN`.
 
 ## Requirements
 
@@ -28,7 +41,17 @@ adapters, built on the PCAN-Basic API. The executable is still named
   `ThirdParty/PCANBasic`,
 - Visual Studio 2017 or newer with support for the `v141` toolset.
 
-## GUI
+## PCAN Sniffer usage
+
+### Features
+
+- captures CAN and CAN-FD frames in a `candump -L` compatible format,
+- replays captured frames with original timing or at full speed,
+- bridges CAN1 and CAN2 in both directions,
+- converts column logs, PCAN-View TRC, GVRET CSV, and SavvyCAN files,
+- provides both a native Windows GUI and a command-line interface.
+
+### GUI
 
 Run `USB2PCAN.exe` without arguments. The GUI provides `Sniff`, `Send`, and
 `Convert` modes, displays the generated command line, and captures program
@@ -42,7 +65,7 @@ be combined with `Listen only`.
 Use `Extra parameters` to append command-line options that do not have a
 dedicated GUI control, for example `--debug`, `--no-brs`, or `--device 1`.
 
-## Command Line
+### Command line
 
 ```text
 USB2PCAN.exe sniff -s 500000 --data 2000000 --can both -f capture.log
@@ -66,6 +89,15 @@ Common options:
 Run `USB2PCAN.exe --help` or press `Help` in the GUI for the complete option
 list.
 
+## Emulator usage
+
+Run the selected emulator, choose an attached PEAK interface and Classic CAN
+bitrate in the `PEAK PCAN connection` panel, then press `Connect`. The status
+line shows the selected PCAN handle and live RX, TX, and error counters.
+
+The protocol controls remain editable while disconnected. Closing the main
+window disconnects the channel and exits the application cleanly.
+
 ## Building
 
 Open `PEAKTools.sln`, select the `x64` or `Win32` platform and the `Debug` or
@@ -74,6 +106,9 @@ the matching `PCANBasic.dll` into the output directory, for example:
 
 ```text
 x64\Release\USB2PCAN.exe
+bin\x64\Release\PCANCanopenEmulator\PCANCanopenEmulator.exe
+bin\x64\Release\PCANJ1939Emulator\PCANJ1939Emulator.exe
+bin\x64\Release\PCANJ1939DtcEmulator\PCANJ1939DtcEmulator.exe
 x64\Release\PCANBasic.dll
 ```
 

@@ -15,10 +15,23 @@
 /Release/
 /x64/
 /Win32/
+/bin/
 /PCANSniffer/Debug/
 /PCANSniffer/Release/
 /PCANSniffer/x64/
 /PCANSniffer/Win32/
+/PCANCanopenEmulator/Debug/
+/PCANCanopenEmulator/Release/
+/PCANCanopenEmulator/x64/
+/PCANCanopenEmulator/Win32/
+/PCANJ1939Emulator/Debug/
+/PCANJ1939Emulator/Release/
+/PCANJ1939Emulator/x64/
+/PCANJ1939Emulator/Win32/
+/PCANJ1939DtcEmulator/Debug/
+/PCANJ1939DtcEmulator/Release/
+/PCANJ1939DtcEmulator/x64/
+/PCANJ1939DtcEmulator/Win32/
 
 # C/C++ build artifacts
 *.obj
