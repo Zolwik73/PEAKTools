@@ -346,11 +346,11 @@ void PcanRuntimeCreateControls(HWND parent, int x, int y, int width)
         CreateWindowExA(0, "COMBOBOX", "", WS_CHILD | WS_VISIBLE | WS_BORDER | CBS_DROPDOWNLIST,
             x + 68, y + 55, 105, 180, parent, (HMENU)IDC_PCAN_BITRATE, GetModuleHandle(NULL), NULL);
         CreateWindowExA(0, "BUTTON", "Refresh", WS_CHILD | WS_VISIBLE,
-            x + width - 188, y + 54, 78, 25, parent, (HMENU)IDC_PCAN_REFRESH, GetModuleHandle(NULL), NULL);
+            x + width - 102, y + 54, 90, 25, parent, (HMENU)IDC_PCAN_REFRESH, GetModuleHandle(NULL), NULL);
         CreateWindowExA(0, "BUTTON", "Connect", WS_CHILD | WS_VISIBLE,
-            x + width - 102, y + 54, 90, 25, parent, (HMENU)IDC_PCAN_CONNECT, GetModuleHandle(NULL), NULL);
+            x + width - 102, y + 84, 90, 25, parent, (HMENU)IDC_PCAN_CONNECT, GetModuleHandle(NULL), NULL);
         CreateWindowExA(0, "STATIC", "Disconnected", WS_CHILD | WS_VISIBLE,
-            x + 12, y + 92, width - 24, 38, parent, (HMENU)IDC_PCAN_STATUS, GetModuleHandle(NULL), NULL);
+            x + 12, y + 92, width - 126, 38, parent, (HMENU)IDC_PCAN_STATUS, GetModuleHandle(NULL), NULL);
         runtimePopulateChannels(parent);
         runtimePopulateBitrates(parent);
         runtimeUpdateControls(parent);
