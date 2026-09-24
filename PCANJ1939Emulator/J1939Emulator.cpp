@@ -889,7 +889,7 @@ static DWORD WINAPI fmsGuiThreadProc(LPVOID)
 
     gFmsGuiWindow = CreateWindowExA(WS_EX_TOPMOST, wc.lpszClassName, "PCAN J1939 Emulator",
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
-        0, 0, 1125, 710, NULL, NULL, wc.hInstance, NULL);
+        0, 0, 1125, 740, NULL, NULL, wc.hInstance, NULL);
 
     if (gFmsGuiWindow)
     {

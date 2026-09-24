@@ -336,7 +336,7 @@ void PcanRuntimeCreateControls(HWND parent, int x, int y, int width)
     if (width < 600)
     {
         CreateWindowExA(0, "BUTTON", "PEAK PCAN connection", WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
-            x, y, width, 128, parent, NULL, GetModuleHandle(NULL), NULL);
+            x, y, width, 144, parent, NULL, GetModuleHandle(NULL), NULL);
         CreateWindowExA(0, "STATIC", "Interface", WS_CHILD | WS_VISIBLE,
             x + 12, y + 25, 54, 20, parent, NULL, GetModuleHandle(NULL), NULL);
         CreateWindowExA(0, "COMBOBOX", "", WS_CHILD | WS_VISIBLE | WS_BORDER | CBS_DROPDOWNLIST | WS_VSCROLL,
@@ -350,7 +350,7 @@ void PcanRuntimeCreateControls(HWND parent, int x, int y, int width)
         CreateWindowExA(0, "BUTTON", "Connect", WS_CHILD | WS_VISIBLE,
             x + width - 102, y + 54, 90, 25, parent, (HMENU)IDC_PCAN_CONNECT, GetModuleHandle(NULL), NULL);
         CreateWindowExA(0, "STATIC", "Disconnected", WS_CHILD | WS_VISIBLE,
-            x + 12, y + 92, width - 24, 20, parent, (HMENU)IDC_PCAN_STATUS, GetModuleHandle(NULL), NULL);
+            x + 12, y + 92, width - 24, 38, parent, (HMENU)IDC_PCAN_STATUS, GetModuleHandle(NULL), NULL);
         runtimePopulateChannels(parent);
         runtimePopulateBitrates(parent);
         runtimeUpdateControls(parent);
@@ -444,9 +444,9 @@ void PcanRuntimeRefreshStatus(HWND parent)
     channel = gRuntimeChannel;
     LeaveCriticalSection(&gRuntimeLock);
     if (connected)
-        sprintf_s(status, "Connected to handle 0x%X    RX %ld    TX %ld    errors %ld",
+        sprintf_s(status, "Connected to handle 0x%X\r\nRX %ld    TX %ld    errors %ld",
             channel, gRuntimeRxCount, gRuntimeTxCount, gRuntimeErrorCount);
     else
-        sprintf_s(status, "Disconnected    errors %ld", gRuntimeErrorCount);
+        sprintf_s(status, "Disconnected\r\nErrors %ld", gRuntimeErrorCount);
     SetWindowTextA(GetDlgItem(parent, IDC_PCAN_STATUS), status);
 }
