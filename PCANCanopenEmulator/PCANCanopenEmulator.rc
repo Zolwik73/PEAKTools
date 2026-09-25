@@ -1,3 +1,5 @@
+// Microsoft Visual C++ generated resource script.
+//
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -5,108 +7,117 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
+#define APSTUDIO_READONLY_SYMBOLS
 #include "winres.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
-IDD_CANOPEN_EMULATOR DIALOGEX 0, 0, 420, 292
-STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+/////////////////////////////////////////////////////////////////////////////
+// Polski (Polska) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_PLK)
+LANGUAGE LANG_POLISH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CANOPEN_EMULATOR DIALOGEX 0, 0, 420, 274
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOPMOST
 CAPTION "PCAN CANopen Emulator"
-FONT 8, "MS Shell Dlg"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    PUSHBUTTON      "Apply", IDC_APPLY, 9, 7, 45, 14
-    PUSHBUTTON      "Default", IDC_DEFAULT, 62, 7, 45, 14
-    AUTOCHECKBOX    "Auto wave", IDC_AUTO_WAVE, 117, 9, 53, 12
-    AUTOCHECKBOX    "Always on top", IDC_TOPMOST, 323, 9, 69, 12
-
-    GROUPBOX        "CANopen / Skaut defaults", -1, 7, 27, 400, 38
-    LTEXT           "BC node", -1, 16, 42, 34, 10
-    EDITTEXT        IDC_BC_NODE, 50, 39, 25, 12, ES_AUTOHSCROLL
-    LTEXT           "Counters SDO node", -1, 86, 42, 70, 10
-    EDITTEXT        IDC_SDO_NODE, 158, 39, 25, 12, ES_AUTOHSCROLL
-    AUTOCHECKBOX    "Single SDO node for LU counters", IDC_SINGLE_SDO_NODE, 195, 40, 120, 12
-    AUTOCHECKBOX    "BC heartbeat", IDC_BC_HEARTBEAT, 16, 53, 64, 10
-    AUTOCHECKBOX    "SDO node heartbeat", IDC_SDO_HEARTBEAT, 86, 53, 86, 10
-
-    GROUPBOX        "LU process data and SDO counters", -1, 7, 70, 400, 127
-    LTEXT           "LU", -1, 16, 85, 16, 10
-    LTEXT           "EN", -1, 35, 85, 17, 10
-    LTEXT           "Ready", -1, 57, 85, 27, 10
-    LTEXT           "Active", -1, 88, 85, 27, 10
-    LTEXT           "Move", -1, 125, 85, 24, 10
-    LTEXT           "WU", -1, 157, 85, 18, 10
-    LTEXT           "CU", -1, 184, 85, 18, 10
-    LTEXT           "Window", -1, 211, 85, 33, 10
-    LTEXT           "Bin", -1, 250, 85, 21, 10
-    LTEXT           "Position x0.1", -1, 278, 85, 49, 10
-    LTEXT           "Short", -1, 335, 85, 28, 10
-    LTEXT           "Total", -1, 369, 85, 28, 10
-
-    LTEXT "LU1", -1, 16, 100, 20, 10
-    AUTOCHECKBOX "", 1100, 37, 98, 14, 12
-    AUTOCHECKBOX "", 1101, 64, 98, 14, 12
-    AUTOCHECKBOX "", 1102, 95, 98, 14, 12
-    EDITTEXT 1103, 122, 98, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1104, 154, 98, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1105, 182, 98, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1106, 213, 98, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1107, 247, 98, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1108, 280, 98, 43, 12, ES_AUTOHSCROLL
-    EDITTEXT 1109, 334, 98, 30, 12, ES_AUTOHSCROLL
-    EDITTEXT 1110, 368, 98, 33, 12, ES_AUTOHSCROLL
-
-    LTEXT "LU2", -1, 16, 120, 20, 10
-    AUTOCHECKBOX "", 1132, 37, 119, 14, 12
-    AUTOCHECKBOX "", 1133, 64, 119, 14, 12
-    AUTOCHECKBOX "", 1134, 95, 119, 14, 12
-    EDITTEXT 1135, 122, 119, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1136, 154, 119, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1137, 182, 119, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1138, 213, 119, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1139, 247, 119, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1140, 280, 119, 43, 12, ES_AUTOHSCROLL
-    EDITTEXT 1141, 334, 119, 30, 12, ES_AUTOHSCROLL
-    EDITTEXT 1142, 368, 119, 33, 12, ES_AUTOHSCROLL
-
-    LTEXT "LU3", -1, 16, 140, 20, 10
-    AUTOCHECKBOX "", 1164, 37, 139, 14, 12
-    AUTOCHECKBOX "", 1165, 64, 139, 14, 12
-    AUTOCHECKBOX "", 1166, 95, 139, 14, 12
-    EDITTEXT 1167, 122, 139, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1168, 154, 139, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1169, 182, 139, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1170, 213, 139, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1171, 247, 139, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1172, 280, 139, 43, 12, ES_AUTOHSCROLL
-    EDITTEXT 1173, 334, 139, 30, 12, ES_AUTOHSCROLL
-    EDITTEXT 1174, 368, 139, 33, 12, ES_AUTOHSCROLL
-
-    LTEXT "LU4", -1, 16, 161, 20, 10
-    AUTOCHECKBOX "", 1196, 37, 159, 14, 12
-    AUTOCHECKBOX "", 1197, 64, 159, 14, 12
-    AUTOCHECKBOX "", 1198, 95, 159, 14, 12
-    EDITTEXT 1199, 122, 159, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1200, 154, 159, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1201, 182, 159, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1202, 213, 159, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1203, 247, 159, 24, 12, ES_AUTOHSCROLL
-    EDITTEXT 1204, 280, 159, 43, 12, ES_AUTOHSCROLL
-    EDITTEXT 1205, 334, 159, 30, 12, ES_AUTOHSCROLL
-    EDITTEXT 1206, 368, 159, 33, 12, ES_AUTOHSCROLL
-
-    GROUPBOX        "Status", -1, 7, 204, 400, 29
-    LTEXT           "", IDC_STATUS, 16, 218, 371, 10
-
-    GROUPBOX        "PEAK PCAN connection", -1, 7, 237, 400, 45
-    LTEXT           "Interface", -1, 14, 250, 31, 10
-    COMBOBOX        IDC_PCAN_CHANNEL, 46, 248, 123, 100, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Bitrate", -1, 176, 250, 28, 10
-    COMBOBOX        IDC_PCAN_BITRATE, 204, 248, 60, 90, CBS_DROPDOWNLIST | WS_TABSTOP
-    PUSHBUTTON      "Refresh", IDC_PCAN_REFRESH, 299, 248, 45, 14
-    PUSHBUTTON      "Connect", IDC_PCAN_CONNECT, 348, 248, 52, 14
-    LTEXT           "Disconnected", IDC_PCAN_STATUS, 14, 267, 386, 10
+    PUSHBUTTON      "Apply",IDC_APPLY,9,7,45,14
+    PUSHBUTTON      "Default",IDC_DEFAULT,62,7,45,14
+    CONTROL         "Auto wave",IDC_AUTO_WAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,117,9,53,12
+    CONTROL         "Always on top",IDC_TOPMOST,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,323,9,69,12
+    GROUPBOX        "CANopen / Skaut defaults",-1,7,27,400,38
+    LTEXT           "BC node",-1,16,42,34,10
+    EDITTEXT        IDC_BC_NODE,50,39,25,12,ES_AUTOHSCROLL
+    LTEXT           "Counters SDO node",-1,86,42,70,10
+    EDITTEXT        IDC_SDO_NODE,158,39,25,12,ES_AUTOHSCROLL
+    CONTROL         "Single SDO node for LU counters",IDC_SINGLE_SDO_NODE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,195,40,120,12
+    CONTROL         "BC heartbeat",IDC_BC_HEARTBEAT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,53,64,10
+    CONTROL         "SDO node heartbeat",IDC_SDO_HEARTBEAT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,86,53,86,10
+    GROUPBOX        "LU process data and SDO counters",-1,7,72,400,114
+    LTEXT           "LU",-1,16,87,16,10
+    LTEXT           "EN",-1,35,87,17,10
+    LTEXT           "Ready",-1,57,87,27,10
+    LTEXT           "Active",-1,88,87,27,10
+    LTEXT           "Move",-1,125,87,24,10
+    LTEXT           "WU",-1,157,87,18,10
+    LTEXT           "CU",-1,184,87,18,10
+    LTEXT           "Window",-1,211,87,33,10
+    LTEXT           "Bin",-1,250,87,21,10
+    LTEXT           "Position x0.1",-1,278,87,49,10
+    LTEXT           "Short",-1,335,87,28,10
+    LTEXT           "Total",-1,369,87,28,10
+    LTEXT           "LU1",-1,16,102,20,10
+    CONTROL         "",1100,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,100,14,12
+    CONTROL         "",1101,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,64,100,14,12
+    CONTROL         "",1102,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,95,100,14,12
+    EDITTEXT        1103,122,100,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1104,154,100,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1105,182,100,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1106,213,100,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1107,247,100,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1108,280,100,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1109,334,100,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1110,368,100,33,12,ES_AUTOHSCROLL
+    LTEXT           "LU2",-1,16,122,20,10
+    CONTROL         "",1132,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,121,14,12
+    CONTROL         "",1133,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,64,121,14,12
+    CONTROL         "",1134,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,95,121,14,12
+    EDITTEXT        1135,122,121,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1136,154,121,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1137,182,121,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1138,213,121,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1139,247,121,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1140,280,121,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1141,334,121,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1142,368,121,33,12,ES_AUTOHSCROLL
+    LTEXT           "LU3",-1,16,142,20,10
+    CONTROL         "",1164,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,141,14,12
+    CONTROL         "",1165,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,64,141,14,12
+    CONTROL         "",1166,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,95,141,14,12
+    EDITTEXT        1167,122,141,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1168,154,141,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1169,182,141,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1170,213,141,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1171,247,141,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1172,280,141,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1173,334,141,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1174,368,141,33,12,ES_AUTOHSCROLL
+    LTEXT           "LU4",-1,16,163,20,10
+    CONTROL         "",1196,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,37,161,14,12
+    CONTROL         "",1197,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,64,161,14,12
+    CONTROL         "",1198,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,95,161,14,12
+    EDITTEXT        1199,122,161,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1200,154,161,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1201,182,161,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1202,213,161,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1203,247,161,24,12,ES_AUTOHSCROLL
+    EDITTEXT        1204,280,161,43,12,ES_AUTOHSCROLL
+    EDITTEXT        1205,334,161,30,12,ES_AUTOHSCROLL
+    EDITTEXT        1206,368,161,33,12,ES_AUTOHSCROLL
+    GROUPBOX        "Status",-1,7,190,400,29
+    LTEXT           "",IDC_STATUS,16,204,371,10
+    GROUPBOX        "PEAK PCAN connection",-1,7,223,400,45
+    LTEXT           "Interface",-1,14,236,31,10
+    COMBOBOX        IDC_PCAN_CHANNEL,46,234,146,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Bitrate",-1,201,236,28,10
+    COMBOBOX        IDC_PCAN_BITRATE,229,234,60,90,CBS_DROPDOWNLIST | WS_TABSTOP
+    PUSHBUTTON      "Refresh",IDC_PCAN_REFRESH,299,234,45,14
+    PUSHBUTTON      "Connect",IDC_PCAN_CONNECT,348,234,52,14
+    LTEXT           "Disconnected",IDC_PCAN_STATUS,14,253,386,10
 END
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -114,12 +125,12 @@ END
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE
+2 TEXTINCLUDE 
 BEGIN
     "#define APSTUDIO_READONLY_SYMBOLS\r\n"
     "#include ""winres.h""\r\n"
@@ -127,9 +138,52 @@ BEGIN
     "\0"
 END
 
-3 TEXTINCLUDE
+3 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "\0"
 END
-#endif
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_CANOPEN_EMULATOR, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CANOPEN_EMULATOR AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // Polski (Polska) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,3 +1,5 @@
+// Microsoft Visual C++ generated resource script.
+//
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -5,53 +7,64 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
+#define APSTUDIO_READONLY_SYMBOLS
 #include "winres.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
-IDD_PCAN_SNIFFER DIALOGEX 0, 0, 459, 365
-STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+/////////////////////////////////////////////////////////////////////////////
+// Polski (Polska) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_PLK)
+LANGUAGE LANG_POLISH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PCAN_SNIFFER DIALOGEX 0, 0, 449, 366
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "PCAN Sniffer"
-FONT 8, "MS Shell Dlg"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    CONTROL         "Sniff", IDC_GUI_MODE_SNIFF, "Button", BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 10, 9, 52, 12
-    CONTROL         "Send", IDC_GUI_MODE_SEND, "Button", BS_AUTORADIOBUTTON | WS_TABSTOP, 64, 9, 52, 12
-    CONTROL         "Convert", IDC_GUI_MODE_CONVERT, "Button", BS_AUTORADIOBUTTON | WS_TABSTOP, 118, 9, 52, 12
-
-    LTEXT           "Log file", -1, 10, 30, 52, 10
-    EDITTEXT        IDC_GUI_LOG_FILE, 64, 28, 343, 13, ES_AUTOHSCROLL
-    PUSHBUTTON      "...", IDC_GUI_BROWSE_LOG, 411, 28, 24, 13
-    LTEXT           "Input file", -1, 10, 47, 52, 10
-    EDITTEXT        IDC_GUI_INPUT_FILE, 64, 45, 343, 13, ES_AUTOHSCROLL
-    PUSHBUTTON      "...", IDC_GUI_BROWSE_INPUT, 411, 45, 24, 13
-
-    LTEXT           "Nominal", -1, 10, 68, 36, 10
-    EDITTEXT        IDC_GUI_SPEED, 48, 66, 54, 13, ES_AUTOHSCROLL
-    LTEXT           "Data", -1, 113, 68, 22, 10
-    EDITTEXT        IDC_GUI_DATA_SPEED, 137, 66, 57, 13, ES_AUTOHSCROLL
-    LTEXT           "CAN", -1, 207, 68, 20, 10
-    EDITTEXT        IDC_GUI_CHANNEL, 229, 66, 39, 13, ES_AUTOHSCROLL
-    LTEXT           "Seconds", -1, 281, 68, 34, 10
-    EDITTEXT        IDC_GUI_SECONDS, 317, 66, 54, 13, ES_AUTOHSCROLL
-
-    AUTOCHECKBOX    "Classic CAN", IDC_GUI_CLASSIC, 10, 89, 69, 12
-    AUTOCHECKBOX    "Listen only", IDC_GUI_LISTEN, 86, 89, 69, 12
-    AUTOCHECKBOX    "Bridge CAN1 <-> CAN2", IDC_GUI_BRIDGE, 161, 89, 103, 12
-    AUTOCHECKBOX    "Loop send", IDC_GUI_LOOP, 10, 104, 69, 12
-    AUTOCHECKBOX    "Fast replay", IDC_GUI_FAST, 86, 104, 69, 12
-    AUTOCHECKBOX    "Batch send", IDC_GUI_BATCH, 161, 104, 69, 12
-
-    LTEXT           "Extra parameters", -1, 10, 124, 52, 10
-    EDITTEXT        IDC_GUI_EXTRA_ARGS, 64, 122, 371, 13, ES_AUTOHSCROLL
-    DEFPUSHBUTTON   "Start", IDC_GUI_START, 263, 143, 54, 16
-    PUSHBUTTON      "Stop", IDC_GUI_STOP, 322, 143, 54, 16
-    PUSHBUTTON      "Help", IDC_GUI_HELP, 382, 143, 54, 16
-
-    LTEXT           "Command", -1, 10, 168, 52, 10
-    EDITTEXT        IDC_GUI_COMMAND_PREVIEW, 10, 179, 425, 13, ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "Console", -1, 10, 199, 52, 10
-    EDITTEXT        IDC_GUI_OUTPUT, 10, 211, 425, 143, ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+    CONTROL         "Sniff",IDC_GUI_MODE_SNIFF,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,12,6,52,12
+    CONTROL         "Send",IDC_GUI_MODE_SEND,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,72,6,52,12
+    CONTROL         "Convert",IDC_GUI_MODE_CONVERT,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,132,6,52,12
+    LTEXT           "Log file",-1,12,32,52,10
+    EDITTEXT        IDC_GUI_LOG_FILE,66,30,343,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_GUI_BROWSE_LOG,414,30,24,13
+    LTEXT           "Input file",-1,12,50,52,10
+    EDITTEXT        IDC_GUI_INPUT_FILE,66,48,343,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_GUI_BROWSE_INPUT,414,48,24,13
+    LTEXT           "Nominal",-1,12,74,36,10
+    EDITTEXT        IDC_GUI_SPEED,48,72,54,13,ES_AUTOHSCROLL
+    LTEXT           "Data",-1,114,74,22,10
+    EDITTEXT        IDC_GUI_DATA_SPEED,138,72,57,13,ES_AUTOHSCROLL
+    LTEXT           "CAN",-1,210,74,20,10
+    EDITTEXT        IDC_GUI_CHANNEL,234,72,39,13,ES_AUTOHSCROLL
+    LTEXT           "Seconds",-1,282,74,34,10
+    EDITTEXT        IDC_GUI_SECONDS,318,72,54,13,ES_AUTOHSCROLL
+    CONTROL         "Classic CAN",IDC_GUI_CLASSIC,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,18,96,69,12
+    CONTROL         "Listen only",IDC_GUI_LISTEN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,96,96,69,12
+    CONTROL         "Bridge CAN1 <-> CAN2",IDC_GUI_BRIDGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,174,96,103,12
+    CONTROL         "Loop send",IDC_GUI_LOOP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,18,108,69,12
+    CONTROL         "Fast replay",IDC_GUI_FAST,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,96,108,69,12
+    CONTROL         "Batch send",IDC_GUI_BATCH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,174,108,69,12
+    LTEXT           "Extra parameters",-1,12,128,52,10
+    EDITTEXT        IDC_GUI_EXTRA_ARGS,66,126,371,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Start",IDC_GUI_START,264,150,54,16
+    PUSHBUTTON      "Stop",IDC_GUI_STOP,324,150,54,16
+    PUSHBUTTON      "Help",IDC_GUI_HELP,384,150,54,16
+    LTEXT           "Command",-1,12,168,52,10
+    EDITTEXT        IDC_GUI_COMMAND_PREVIEW,12,180,425,13,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Console",-1,12,198,52,10
+    EDITTEXT        IDC_GUI_OUTPUT,12,210,425,143,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
 END
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -59,12 +72,12 @@ END
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE
+2 TEXTINCLUDE 
 BEGIN
     "#define APSTUDIO_READONLY_SYMBOLS\r\n"
     "#include ""winres.h""\r\n"
@@ -72,9 +85,53 @@ BEGIN
     "\0"
 END
 
-3 TEXTINCLUDE
+3 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "\0"
 END
-#endif
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_PCAN_SNIFFER, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 365
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_PCAN_SNIFFER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // Polski (Polska) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

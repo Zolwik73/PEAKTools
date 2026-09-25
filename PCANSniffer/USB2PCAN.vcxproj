@@ -158,6 +158,9 @@
   <ItemGroup>
     <ResourceCompile Include="PCANSniffer.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\CommonControls.manifest" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
